@@ -9,7 +9,7 @@ include_directories(${PROJECT_SOURCE_DIR}/dependencies/SDL2/include)
 include_directories(${PROJECT_SOURCE_DIR}/includes)
 LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/dependencies/SDL2/lib/x64)
 
-add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp includes/renderWindow.h)
+add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp includes/renderWindow.h src/createRandomData.cpp includes/createRandomData.h src/rectangle.cpp includes/rectangle.h)
 
 target_link_libraries(${PROJECT_NAME}
         SDL2main
