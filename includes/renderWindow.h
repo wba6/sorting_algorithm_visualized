@@ -7,6 +7,7 @@
 #include <iostream>
 #include <vector>
 #include "SDL.h"
+#include "createRandomData.h"
 
 class renderWindow {
 public:
@@ -33,8 +34,9 @@ public:
   std::vector<SDL_Event> events;
 
 private:
-  bool isRunning;
-  SDL_Window *window;
+    createRandomData randData;
+    bool isRunning;
+    SDL_Window *window;
 };
 
 #endif // DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

@@ -5,16 +5,16 @@
 #include "SDL.h"
 class rectangle {
 public:
-  rectangle(const int hieght, int interation);
+    rectangle(const int hieght, int interation);
 
-  SDL_Rect getDestRect(){return destRect;};
-  SDL_Rect getSrcRect(){return srcRect;};
+    SDL_Rect &getDestRect() { return destRect; };
+    SDL_Rect &getSrcRect() { return srcRect; };
 
-  ~rectangle();
+    ~rectangle();
 
 private:
-  int width;
-  SDL_Rect srcRect, destRect;
+    int width;
+    SDL_Rect srcRect, destRect;
 };
 
 #endif // SORTING_ALGORITHM_VISUALIZED_RECTANGLE_H
