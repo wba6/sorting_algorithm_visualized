@@ -2,7 +2,7 @@
 #include "createRandomData.h"
 #include <random>
 createRandomData::createRandomData(SDL_Renderer *render)
-    : rend(render), rectLimit(80)
+    : rend(render), rectLimit(52)
 {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(20, 500);
