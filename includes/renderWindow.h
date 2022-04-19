@@ -4,34 +4,34 @@
 #define DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H
 
 
-#include <iostream>
-#include <vector>
 #include "SDL.h"
 #include "createRandomData.h"
+#include <iostream>
+#include <vector>
 
 class renderWindow {
 public:
-  renderWindow();
+    renderWindow();
 
-  virtual ~renderWindow();
+    virtual ~renderWindow();
 
-  void init(const char *title, int xpos, int ypos, int width, int height,
-            bool fullscreen);
+    void init(const char *title, int xpos, int ypos, int width, int height,
+              bool fullscreen);
 
-  void handleEvents();
+    void handleEvents();
 
-  void update();
+    void update();
 
-  void render();
+    void render();
 
-  bool running();
+    bool running();
 
-  void restart();
+    void restart();
 
-  SDL_Window *getWindow() const;
+    SDL_Window *getWindow() const;
 
-  SDL_Renderer *renderer;
-  std::vector<SDL_Event> events;
+    SDL_Renderer *renderer;
+    std::vector<SDL_Event> events;
 
 private:
     createRandomData *randData;
@@ -39,4 +39,4 @@ private:
     SDL_Window *window;
 };
 
-#endif // DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H
+#endif// DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

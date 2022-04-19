@@ -3,9 +3,9 @@
 #ifndef SORTING_ALGORITHM_VISUALIZED_CREATERANDOMDATA_H
 #define SORTING_ALGORITHM_VISUALIZED_CREATERANDOMDATA_H
 
-#include <vector>
 #include "SDL.h"
 #include "rectangle.h"
+#include <vector>
 class createRandomData {
 public:
     explicit createRandomData(SDL_Renderer *render);
