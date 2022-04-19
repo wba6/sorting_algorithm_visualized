@@ -1,7 +1,7 @@
 
 #include "createRandomData.h"
 #include <random>
-createRandomData::createRandomData(SDL_Renderer **render)
+createRandomData::createRandomData(SDL_Renderer *render)
     : rend(render), rectLimit(80)
 {
     std::default_random_engine generator;
@@ -19,8 +19,10 @@ createRandomData::~createRandomData() = default;
 
 void createRandomData::renderRandomData()
 {
+
+    SDL_SetRenderDrawColor(rend, 100, 150, 150, 255);
     for (auto &rect: rectangleVec)
     {
-        SDL_RenderFillRect((*rend), &rect->getDestRect());
+        SDL_RenderFillRect(rend, &rect->getDestRect());
     }
 }

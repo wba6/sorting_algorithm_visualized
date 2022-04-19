@@ -34,7 +34,7 @@ public:
   std::vector<SDL_Event> events;
 
 private:
-    createRandomData randData;
+    createRandomData *randData;
     bool isRunning;
     SDL_Window *window;
 };

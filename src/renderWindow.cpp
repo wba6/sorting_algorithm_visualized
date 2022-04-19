@@ -44,7 +44,7 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     {
         isRunning = false;
     }
-    auto randData = new createRandomData(&renderer);
+    randData = new createRandomData(renderer);
 }
 
 void renderWindow::handleEvents()
@@ -73,7 +73,11 @@ void renderWindow::render()
 {
     // clear render buffer
     SDL_RenderClear(renderer);
-    randData.renderRandomData();
+    //randData.renderRandomData();
+    randData->renderRandomData();
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+
     // render new stuff
     SDL_RenderPresent(renderer);
 }

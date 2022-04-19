@@ -8,13 +8,12 @@ public:
     rectangle(const int hieght, int interation);
 
     SDL_Rect &getDestRect() { return destRect; };
-    SDL_Rect &getSrcRect() { return srcRect; };
 
     ~rectangle();
 
 private:
     int width;
-    SDL_Rect srcRect, destRect;
+    SDL_Rect destRect;
 };
 
 #endif // SORTING_ALGORITHM_VISUALIZED_RECTANGLE_H
