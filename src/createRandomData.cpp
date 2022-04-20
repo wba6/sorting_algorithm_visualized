@@ -12,6 +12,8 @@ createRandomData::createRandomData(SDL_Renderer *render)
         //TODO: create move constuctor in rectangle.h current mem leak
         rectangle *rect = new rectangle(randNum, (int) i);
         rectangleVec.push_back(rect);
+        rect = nullptr;
+        delete rect;
     }
 }
 createRandomData::~createRandomData() = default;

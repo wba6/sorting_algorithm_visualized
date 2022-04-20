@@ -6,8 +6,8 @@
 class rectangle {
 public:
     rectangle(const int hieght, int interation);
-
     SDL_Rect &getDestRect() { return destRect; };
+
 
     ~rectangle();
 
