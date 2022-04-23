@@ -4,7 +4,7 @@ int main(int argv, char **args)
 {
 
     renderWindow window;
-    window.init("window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600,
+    window.init("m_window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 800, 600,
                 false);
 
     while (window.running())

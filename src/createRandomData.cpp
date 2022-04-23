@@ -9,7 +9,7 @@ createRandomData::createRandomData(SDL_Renderer *render)
     for (size_t i{rectLimit}; i > 0; i--)
     {
         int randNum = distribution(generator);
-        //TODO: create move constuctor in rectangle.h current mem leak
+        //TODO: check for mem leak using valgrind
         rectangle *rect = new rectangle(randNum, (int) i);
         rectangleVec.push_back(rect);
         rect = nullptr;

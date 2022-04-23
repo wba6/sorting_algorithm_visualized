@@ -148,9 +148,9 @@ extern DECLSPEC void SDLCALL SDL_SetMainReady(void);
 #ifdef __WIN32__
 
 /**
- * Register a win32 window class for SDL's use.
+ * Register a win32 m_window class for SDL's use.
  *
- * This can be called to set the application window class at startup. It is
+ * This can be called to set the application m_window class at startup. It is
  * safe to call this multiple times, as long as every call is eventually
  * paired with a call to SDL_UnregisterApp, but a second registration attempt
  * while a previous registration is still active will be ignored, other than
@@ -159,7 +159,7 @@ extern DECLSPEC void SDLCALL SDL_SetMainReady(void);
  * Most applications do not need to, and should not, call this directly; SDL
  * will call it when initializing the video subsystem.
  *
- * \param name the window class name, in UTF-8 encoding. If NULL, SDL
+ * \param name the m_window class name, in UTF-8 encoding. If NULL, SDL
  *             currently uses "SDL_app" but this isn't guaranteed.
  * \param style the value to use in WNDCLASSEX::style. If `name` is NULL, SDL
  *              currently uses `(CS_BYTEALIGNCLIENT | CS_OWNDC)` regardless of
@@ -173,7 +173,7 @@ extern DECLSPEC void SDLCALL SDL_SetMainReady(void);
 extern DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void *hInst);
 
 /**
- * Deregister the win32 window class from an SDL_RegisterApp call.
+ * Deregister the win32 m_window class from an SDL_RegisterApp call.
  *
  * This can be called to undo the effects of SDL_RegisterApp.
  *
@@ -181,7 +181,7 @@ extern DECLSPEC int SDLCALL SDL_RegisterApp(const char *name, Uint32 style, void
  * will call it when deinitializing the video subsystem.
  *
  * It is safe to call this multiple times, as long as every call is eventually
- * paired with a prior call to SDL_RegisterApp. The window class will only be
+ * paired with a prior call to SDL_RegisterApp. The m_window class will only be
  * deregistered when the registration counter in SDL_RegisterApp decrements to
  * zero through calls to this function.
  *

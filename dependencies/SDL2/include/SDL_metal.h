@@ -50,7 +50,7 @@ typedef void *SDL_MetalView;
 
 /**
  * Create a CAMetalLayer-backed NSView/UIView and attach it to the specified
- * window.
+ * m_window.
  *
  * On macOS, this does *not* associate a MTLDevice with the CAMetalLayer on
  * its own. It is up to user code to do that.
@@ -87,7 +87,7 @@ extern DECLSPEC void SDLCALL SDL_Metal_DestroyView(SDL_MetalView view);
 extern DECLSPEC void *SDLCALL SDL_Metal_GetLayer(SDL_MetalView view);
 
 /**
- * Get the size of a window's underlying drawable in pixels (for use with
+ * Get the size of a m_window's underlying drawable in pixels (for use with
  * setting viewport, scissor & etc).
  *
  * \param window SDL_Window from which the drawable size should be queried

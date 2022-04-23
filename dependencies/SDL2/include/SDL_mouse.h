@@ -72,9 +72,9 @@ typedef enum
 /* Function prototypes */
 
 /**
- * Get the window which currently has mouse focus.
+ * Get the m_window which currently has mouse focus.
  *
- * \returns the window with mouse focus.
+ * \returns the m_window with mouse focus.
  *
  * \since This function is available since SDL 2.0.0.
  */
@@ -86,13 +86,13 @@ extern DECLSPEC SDL_Window * SDLCALL SDL_GetMouseFocus(void);
  * The current button state is returned as a button bitmask, which can be
  * tested using the `SDL_BUTTON(X)` macros (where `X` is generally 1 for the
  * left, 2 for middle, 3 for the right button), and `x` and `y` are set to the
- * mouse cursor position relative to the focus window. You can pass NULL for
+ * mouse cursor position relative to the focus m_window. You can pass NULL for
  * either `x` or `y`.
  *
  * \param x the x coordinate of the mouse cursor position relative to the
- *          focus window
+ *          focus m_window
  * \param y the y coordinate of the mouse cursor position relative to the
- *          focus window
+ *          focus m_window
  * \returns a 32-bit button bitmask of the current button state.
  *
  * \since This function is available since SDL 2.0.0.
@@ -108,10 +108,10 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetMouseState(int *x, int *y);
  *
  * This works similarly to SDL_GetMouseState(), but the coordinates will be
  * reported relative to the top-left of the desktop. This can be useful if you
- * need to track the mouse outside of a specific window and SDL_CaptureMouse()
+ * need to track the mouse outside of a specific m_window and SDL_CaptureMouse()
  * doesn't fit your needs. For example, it could be useful if you need to
- * track the mouse while dragging a window, where coordinates relative to a
- * window might not be in sync at all times.
+ * track the mouse while dragging a m_window, where coordinates relative to a
+ * m_window might not be in sync at all times.
  *
  * Note: SDL_GetMouseState() returns the mouse position as SDL understands it
  * from the last pump of the event queue. This function, however, queries the
@@ -152,17 +152,17 @@ extern DECLSPEC Uint32 SDLCALL SDL_GetGlobalMouseState(int *x, int *y);
 extern DECLSPEC Uint32 SDLCALL SDL_GetRelativeMouseState(int *x, int *y);
 
 /**
- * Move the mouse cursor to the given position within the window.
+ * Move the mouse cursor to the given position within the m_window.
  *
  * This function generates a mouse motion event.
  *
  * Note that this function will appear to succeed, but not actually move the
  * mouse when used over Microsoft Remote Desktop.
  *
- * \param window the window to move the mouse into, or NULL for the current
+ * \param window the m_window to move the mouse into, or NULL for the current
  *               mouse focus
- * \param x the x coordinate within the window
- * \param y the y coordinate within the window
+ * \param x the x coordinate within the m_window
+ * \param y the y coordinate within the m_window
  *
  * \since This function is available since SDL 2.0.0.
  *
@@ -197,7 +197,7 @@ extern DECLSPEC int SDLCALL SDL_WarpMouseGlobal(int x, int y);
  * Set relative mouse mode.
  *
  * While the mouse is in relative mode, the cursor is hidden, and the driver
- * will try to report continuous motion in the current window. Only relative
+ * will try to report continuous motion in the current m_window. Only relative
  * motion events will be delivered, the mouse position will not change.
  *
  * Note that this function will not be able to provide continuous relative
@@ -219,13 +219,13 @@ extern DECLSPEC int SDLCALL SDL_WarpMouseGlobal(int x, int y);
 extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
 
 /**
- * Capture the mouse and to track input outside an SDL window.
+ * Capture the mouse and to track input outside an SDL m_window.
  *
  * Capturing enables your app to obtain mouse events globally, instead of just
- * within your window. Not all video targets support this function. When
- * capturing is enabled, the current window will get all mouse events, but
+ * within your m_window. Not all video targets support this function. When
+ * capturing is enabled, the current m_window will get all mouse events, but
  * unlike relative mode, no change is made to the cursor and it is not
- * restrained to your window.
+ * restrained to your m_window.
  *
  * This function may also deny mouse input to other windows--both those in
  * your application and others on the system--so you should use this function
@@ -237,12 +237,12 @@ extern DECLSPEC int SDLCALL SDL_SetRelativeMouseMode(SDL_bool enabled);
  * on your goals.
  *
  * While captured, mouse events still report coordinates relative to the
- * current (foreground) window, but those coordinates may be outside the
- * bounds of the window (including negative values). Capturing is only allowed
- * for the foreground window. If the window loses focus while capturing, the
+ * current (foreground) m_window, but those coordinates may be outside the
+ * bounds of the m_window (including negative values). Capturing is only allowed
+ * for the foreground m_window. If the m_window loses focus while capturing, the
  * capture will be disabled automatically.
  *
- * While capturing is enabled, the current window will have the
+ * While capturing is enabled, the current m_window will have the
  * `SDL_WINDOW_MOUSE_CAPTURE` flag set.
  *
  * \param enabled SDL_TRUE to enable capturing, SDL_FALSE to disable.
