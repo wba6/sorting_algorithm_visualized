@@ -1,12 +1,16 @@
-//
-// Created by William Aey on 4/22/2022.
-//
+
 
 #ifndef SORTING_ALGORITHM_VISUALIZED_ANIMATEMOVEMENT_H
 #define SORTING_ALGORITHM_VISUALIZED_ANIMATEMOVEMENT_H
 
 
+#include "rectangle.h"
+#include <vector>
 class animateMovement {
+
+    animateMovement() = default;
+    void moveTo(std::vector<rectangle *> &vector,size_t currentIteration,size_t swapWidth, unsigned diration);
+
 };
 
 

@@ -1,12 +1,15 @@
 
 
 #include "renderWindow.h"
+
+unsigned int renderWindow::s_windowWidth = 0;
+unsigned int renderWindow::s_windowHeight = 0;
 renderWindow::renderWindow() : randData(nullptr) {}
 
 renderWindow::~renderWindow()
 {
 
-    SDL_DestroyWindow(window);
+    SDL_DestroyWindow(m_window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
     std::cout << "renderWindow cleaned" << std::endl;
@@ -15,34 +18,36 @@ renderWindow::~renderWindow()
 void renderWindow::init(const char *title, int xpos, int ypos, int width, int height,
                         bool fullscreen)
 {
+    s_windowHeight = height;
+    s_windowWidth = width;
     int flags{0};
     // checks if fullscreen is true
     flags = fullscreen ? SDL_WINDOW_FULLSCREEN : 0;
     // checks to make sure that the system is initialized correctly before making
-    // a window
+    // a m_window
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "subsystem running" << std::endl;
-        window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
-        // check if window was made successfully
-        if (window)
+        m_window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+        // check if m_window was made successfully
+        if (m_window)
         {
-            std::cout << "window created" << std::endl;
+            std::cout << "m_window created" << std::endl;
         }
 
         // create render
-        renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
+        renderer = SDL_CreateRenderer(m_window, -1, SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC);
         if (renderer)
         {
             SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
             std::cout << "Render created" << std::endl;
         }
 
-        isRunning = true;
+        m_isRunning = true;
     }
     else
     {
-        isRunning = false;
+        m_isRunning = false;
     }
     randData = new createRandomData(renderer);
 }
@@ -57,7 +62,7 @@ void renderWindow::handleEvents()
         switch (event.type)
         {
             case SDL_QUIT:
-                isRunning = false;
+                m_isRunning = false;
                 break;
         }
         events.push_back(event);
@@ -82,11 +87,11 @@ void renderWindow::render()
     SDL_RenderPresent(renderer);
 }
 
-bool renderWindow::running() { return isRunning; }
+bool renderWindow::running() { return m_isRunning; }
 
 SDL_Window *renderWindow::getWindow() const
 {
-    return window;
+    return m_window;
 }
 
 

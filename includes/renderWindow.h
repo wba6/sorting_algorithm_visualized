@@ -33,10 +33,12 @@ public:
     SDL_Renderer *renderer;
     std::vector<SDL_Event> events;
 
+    static unsigned int s_windowWidth;
+    static unsigned int s_windowHeight;
 private:
     createRandomData *randData;
-    bool isRunning;
-    SDL_Window *window;
+    bool m_isRunning;
+    SDL_Window *m_window;
 };
 
 #endif// DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

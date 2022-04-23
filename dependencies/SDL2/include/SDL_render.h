@@ -186,13 +186,13 @@ extern DECLSPEC int SDLCALL SDL_GetRenderDriverInfo(int index,
                                                     SDL_RendererInfo * info);
 
 /**
- * Create a window and default renderer.
+ * Create a m_window and default renderer.
  *
- * \param width the width of the window
- * \param height the height of the window
- * \param window_flags the flags used to create the window (see
+ * \param width the width of the m_window
+ * \param height the height of the m_window
+ * \param window_flags the flags used to create the m_window (see
  *                     SDL_CreateWindow())
- * \param window a pointer filled with the window, or NULL on error
+ * \param window a pointer filled with the m_window, or NULL on error
  * \param renderer a pointer filled with the renderer, or NULL on error
  * \returns 0 on success, or -1 on error; call SDL_GetError() for more
  *          information.
@@ -208,9 +208,9 @@ extern DECLSPEC int SDLCALL SDL_CreateWindowAndRenderer(
 
 
 /**
- * Create a 2D rendering context for a window.
+ * Create a 2D rendering context for a m_window.
  *
- * \param window the window where rendering is displayed
+ * \param window the m_window where rendering is displayed
  * \param index the index of the rendering driver to initialize, or -1 to
  *              initialize the first one supporting the requested flags
  * \param flags 0, or one or more SDL_RendererFlags OR'd together
@@ -249,9 +249,9 @@ extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateRenderer(SDL_Window * window,
 extern DECLSPEC SDL_Renderer * SDLCALL SDL_CreateSoftwareRenderer(SDL_Surface * surface);
 
 /**
- * Get the renderer associated with a window.
+ * Get the renderer associated with a m_window.
  *
- * \param window the window to query
+ * \param window the m_window to query
  * \returns the rendering context on success or NULL on failure; call
  *          SDL_GetError() for more information.
  *
@@ -281,7 +281,7 @@ extern DECLSPEC int SDLCALL SDL_GetRendererInfo(SDL_Renderer * renderer,
  * Get the output size in pixels of a rendering context.
  *
  * Due to high-dpi displays, you might end up with a rendering context that
- * has more pixels than the window that contains it, so use this instead of
+ * has more pixels than the m_window that contains it, so use this instead of
  * SDL_GetWindowSize() to decide how much drawing area you have.
  *
  * \param renderer the rendering context
@@ -746,14 +746,14 @@ extern DECLSPEC SDL_bool SDLCALL SDL_RenderTargetSupported(SDL_Renderer *rendere
  * `SDL_RENDERER_TARGETTEXTURE` bit in the flags of SDL_RendererInfo to see if
  * render targets are supported.
  *
- * The default render target is the window for which the renderer was created.
- * To stop rendering to a texture and render to the window again, call this
+ * The default render target is the m_window for which the renderer was created.
+ * To stop rendering to a texture and render to the m_window again, call this
  * function with a NULL `texture`.
  *
  * \param renderer the rendering context
  * \param texture the targeted texture, which must be created with the
  *                `SDL_TEXTUREACCESS_TARGET` flag, or NULL to render to the
- *                window instead of a texture.
+ *                m_window instead of a texture.
  * \returns 0 on success or a negative error code on failure; call
  *          SDL_GetError() for more information.
  *
@@ -767,7 +767,7 @@ extern DECLSPEC int SDLCALL SDL_SetRenderTarget(SDL_Renderer *renderer,
 /**
  * Get the current render target.
  *
- * The default render target is the window for which the renderer was created,
+ * The default render target is the m_window for which the renderer was created,
  * and is reported a NULL here.
  *
  * \param renderer the rendering context
@@ -787,7 +787,7 @@ extern DECLSPEC SDL_Texture * SDLCALL SDL_GetRenderTarget(SDL_Renderer *renderer
  * resolution. If the actual output resolution doesn't have the same aspect
  * ratio the output rendering will be centered within the output display.
  *
- * If the output display is a window, mouse and touch events in the window
+ * If the output display is a m_window, mouse and touch events in the m_window
  * will be filtered and scaled so they seem to arrive within the logical
  * resolution. The SDL_HINT_MOUSE_RELATIVE_SCALING hint controls whether
  * relative motion events are also scaled.
@@ -860,8 +860,8 @@ extern DECLSPEC SDL_bool SDLCALL SDL_RenderGetIntegerScale(SDL_Renderer * render
 /**
  * Set the drawing area for rendering on the current target.
  *
- * When the window is resized, the viewport is reset to fill the entire new
- * window size.
+ * When the m_window is resized, the viewport is reset to fill the entire new
+ * m_window size.
  *
  * \param renderer the rendering context
  * \param rect the SDL_Rect structure representing the drawing area, or NULL
@@ -979,15 +979,15 @@ extern DECLSPEC void SDLCALL SDL_RenderGetScale(SDL_Renderer * renderer,
 
 /**
  * Get logical coordinates of point in renderer when given real coordinates of
- * point in window.
+ * point in m_window.
  *
  * Logical coordinates will differ from real coordinates when render is scaled
  * and logical renderer size set
  *
  * \param renderer the renderer from which the logical coordinates should be
  *                 calcualted
- * \param windowX the real X coordinate in the window
- * \param windowY the real Y coordinate in the window
+ * \param windowX the real X coordinate in the m_window
+ * \param windowY the real Y coordinate in the m_window
  * \param logicalX the pointer filled with the logical x coordinate
  * \param logicalY the pointer filled with the logical y coordinate
  *
@@ -1003,14 +1003,14 @@ extern DECLSPEC void SDLCALL SDL_RenderWindowToLogical(SDL_Renderer * renderer,
                                                             float *logicalX, float *logicalY);
                                                   
                                                   /**
- * Get real coordinates of point in window when given logical coordinates of point in renderer.
+ * Get real coordinates of point in m_window when given logical coordinates of point in renderer.
  * Logical coordinates will differ from real coordinates when render is scaled and logical renderer size set
  * 
- * \param renderer the renderer from which the window coordinates should be calculated
+ * \param renderer the renderer from which the m_window coordinates should be calculated
  * \param logicalX the logical x coordinate
  * \param logicalY the logical y coordinate
- * \param windowX the pointer filled with the real X coordinate in the window
- * \param windowY the pointer filled with the real Y coordinate in the window
+ * \param windowX the pointer filled with the real X coordinate in the m_window
+ * \param windowY the pointer filled with the real Y coordinate in the m_window
  
  *  
  * \since This function is available since SDL 2.0.18.
@@ -1737,7 +1737,7 @@ extern DECLSPEC void SDLCALL SDL_RenderPresent(SDL_Renderer * renderer);
 extern DECLSPEC void SDLCALL SDL_DestroyTexture(SDL_Texture * texture);
 
 /**
- * Destroy the rendering context for a window and free associated textures.
+ * Destroy the rendering context for a m_window and free associated textures.
  *
  * \param renderer the rendering context
  *
@@ -1854,9 +1854,9 @@ extern DECLSPEC void *SDLCALL SDL_RenderGetMetalLayer(SDL_Renderer * renderer);
  * headers, but it can be safely cast to an `id<MTLRenderCommandEncoder>`.
  *
  * Note that as of SDL 2.0.18, this will return NULL if Metal refuses to give
- * SDL a drawable to render to, which might happen if the window is
+ * SDL a drawable to render to, which might happen if the m_window is
  * hidden/minimized/offscreen. This doesn't apply to command encoders for
- * render targets, just the window's backbacker. Check your return values!
+ * render targets, just the m_window's backbacker. Check your return values!
  *
  * \param renderer The renderer to query
  * \returns an `id<MTLRenderCommandEncoder>` on success, or NULL if the

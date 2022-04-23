@@ -161,7 +161,7 @@ extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriorityAndPolicy(Sint64 threadID,
 /* Platform specific functions for iOS */
 #ifdef __IPHONEOS__
 
-#define SDL_iOSSetAnimationCallback(window, interval, callback, callbackParam) SDL_iPhoneSetAnimationCallback(window, interval, callback, callbackParam)
+#define SDL_iOSSetAnimationCallback(m_window, interval, callback, callbackParam) SDL_iPhoneSetAnimationCallback(m_window, interval, callback, callbackParam)
 
 /**
  * Use this function to set the animation callback on Apple iOS.
@@ -183,7 +183,7 @@ extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriorityAndPolicy(Sint64 threadID,
  * This functions is also accessible using the macro
  * SDL_iOSSetAnimationCallback() since SDL 2.0.4.
  *
- * \param window the window for which the animation callback should be set
+ * \param m_window the m_window for which the animation callback should be set
  * \param interval the number of frames after which **callback** will be
  *                 called
  * \param callback the function to call for every frame.
@@ -195,7 +195,7 @@ extern DECLSPEC int SDLCALL SDL_LinuxSetThreadPriorityAndPolicy(Sint64 threadID,
  *
  * \sa SDL_iPhoneSetEventPump
  */
-extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * window, int interval, void (*callback)(void*), void *callbackParam);
+extern DECLSPEC int SDLCALL SDL_iPhoneSetAnimationCallback(SDL_Window * m_window, int interval, void (*callback)(void*), void *callbackParam);
 
 #define SDL_iOSSetEventPump(enabled) SDL_iPhoneSetEventPump(enabled)
 

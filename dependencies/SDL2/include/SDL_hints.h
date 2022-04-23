@@ -61,13 +61,13 @@ extern "C" {
  *  \brief Specify the behavior of Alt+Tab while the keyboard is grabbed.
  *
  * By default, SDL emulates Alt+Tab functionality while the keyboard is grabbed
- * and your window is full-screen. This prevents the user from getting stuck in
+ * and your m_window is full-screen. This prevents the user from getting stuck in
  * your application if you've enabled keyboard grab.
  *
  * The variable can be set to the following values:
  *   "0"       - SDL will not handle Alt+Tab. Your application is responsible
                  for handling Alt+Tab while the keyboard is grabbed.
- *   "1"       - SDL will minimize your window when Alt+Tab is pressed (default)
+ *   "1"       - SDL will minimize your m_window when Alt+Tab is pressed (default)
 */
 #define SDL_HINT_ALLOW_ALT_TAB_WHILE_GRABBED "SDL_ALLOW_ALT_TAB_WHILE_GRABBED"
 
@@ -372,9 +372,9 @@ extern "C" {
  * This hint only applies to the emscripten platform
  *
  * The variable can be one of
- *    "#window"      - The javascript window object (this is the default)
+ *    "#m_window"      - The javascript m_window object (this is the default)
  *    "#document"    - The javascript document object
- *    "#screen"      - the javascript window.screen object
+ *    "#screen"      - the javascript m_window.screen object
  *    "#canvas"      - the WebGL canvas element
  *    any other string without a leading # sign applies to the element on the page with that ID.
  */
@@ -871,13 +871,13 @@ extern "C" {
 #define SDL_HINT_MOUSE_DOUBLE_CLICK_TIME    "SDL_MOUSE_DOUBLE_CLICK_TIME"
 
 /**
- *  \brief Allow mouse click events when clicking to focus an SDL window
+ *  \brief Allow mouse click events when clicking to focus an SDL m_window
  *
  *  This variable can be set to the following values:
- *    "0"       - Ignore mouse clicks that activate a window
- *    "1"       - Generate events for mouse clicks that activate a window
+ *    "0"       - Ignore mouse clicks that activate a m_window
+ *    "1"       - Generate events for mouse clicks that activate a m_window
  *
- *  By default SDL will ignore mouse clicks that activate a window
+ *  By default SDL will ignore mouse clicks that activate a m_window
  */
 #define SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH "SDL_MOUSE_FOCUS_CLICKTHROUGH"
 
@@ -1015,7 +1015,7 @@ extern "C" {
  *  gestures (e.g. events view, close/minimize gestures), the system needs to
  *  know in which orientation the application is currently drawing its contents.
  *
- *  This does not cause the window to be rotated or resized, the application
+ *  This does not cause the m_window to be rotated or resized, the application
  *  needs to take care of drawing the content in the right orientation (the
  *  framebuffer is always in portrait mode).
  *
@@ -1025,7 +1025,7 @@ extern "C" {
 #define SDL_HINT_QTWAYLAND_CONTENT_ORIENTATION "SDL_QTWAYLAND_CONTENT_ORIENTATION"
 
 /**
- *  \brief  Flags to set on QtWayland windows to integrate with the native window manager.
+ *  \brief  Flags to set on QtWayland windows to integrate with the native m_window manager.
  *
  *  On QtWayland platforms, this hint controls the flags to set on the windows.
  *  For example, on Sailfish OS "OverridesSystemGestures" disables swipe gestures.
@@ -1319,10 +1319,10 @@ extern "C" {
 #define SDL_HINT_VIDEO_DOUBLE_BUFFER      "SDL_VIDEO_DOUBLE_BUFFER"
 
 /**
- * \brief A variable controlling whether the EGL window is allowed to be
+ * \brief A variable controlling whether the EGL m_window is allowed to be
  * composited as transparent, rather than opaque.
  *
- * Most window systems will always render windows opaque, even if the surface
+ * Most m_window systems will always render windows opaque, even if the surface
  * format has an alpha channel. This is not always true, however, so by default
  * SDL will try to enforce opaque composition. To override this behavior, you
  * can set this hint to "1".
@@ -1340,7 +1340,7 @@ extern "C" {
  * context will be automatically saved and restored when pausing the application. Additionally, some
  * platforms will assume usage of OpenGL if Vulkan isn't used. Setting this to "1" will prevent this
  * behavior, which is desireable when the application manages the graphics context, such as
- * an externally managed OpenGL context or attaching a Vulkan surface to the window.
+ * an externally managed OpenGL context or attaching a Vulkan surface to the m_window.
  */
 #define SDL_HINT_VIDEO_EXTERNAL_CONTEXT    "SDL_VIDEO_EXTERNAL_CONTEXT"
 
@@ -1397,7 +1397,7 @@ extern "C" {
 *  1. Its pixel format will be set to the same pixel format as this SDL_Window.  This is
 *  needed for example when sharing an OpenGL context across multiple windows.
 *
-*  2. The flag SDL_WINDOW_OPENGL will be set on the new window so it can be used for
+*  2. The flag SDL_WINDOW_OPENGL will be set on the new m_window so it can be used for
 *  OpenGL rendering.
 *
 *  This variable can be set to the following values:
@@ -1454,7 +1454,7 @@ extern "C" {
  *
  *  By default SDL will use _NET_WM_PING, but for applications that know they
  *  will not always be able to respond to ping requests in a timely manner they can
- *  turn it off to avoid the window manager thinking the app is hung.
+ *  turn it off to avoid the m_window manager thinking the app is hung.
  *  The hint is checked in CreateWindow.
  */
 #define SDL_HINT_VIDEO_X11_NET_WM_PING      "SDL_VIDEO_X11_NET_WM_PING"
@@ -1483,7 +1483,7 @@ extern "C" {
  *    "0"       - Disable XRandR
  *    "1"       - Enable XRandR
  *
- *  By default SDL will not use XRandR because of window manager issues.
+ *  By default SDL will not use XRandR because of m_window manager issues.
  */
 #define SDL_HINT_VIDEO_X11_XRANDR           "SDL_VIDEO_X11_XRANDR"
 
@@ -1582,8 +1582,8 @@ extern "C" {
  *  \brief  A variable controlling whether the windows message loop is processed by SDL 
  *
  *  This variable can be set to the following values:
- *    "0"       - The window message loop is not run
- *    "1"       - The window message loop is processed in SDL_PumpEvents()
+ *    "0"       - The m_window message loop is not run
+ *    "1"       - The m_window message loop is processed in SDL_PumpEvents()
  *
  *  By default SDL will process the windows message loop
  */
@@ -1626,10 +1626,10 @@ extern "C" {
 #define SDL_HINT_WINDOWS_INTRESOURCE_ICON_SMALL "SDL_WINDOWS_INTRESOURCE_ICON_SMALL"
 
 /**
- *  \brief Tell SDL not to generate window-close events for Alt+F4 on Windows.
+ *  \brief Tell SDL not to generate m_window-close events for Alt+F4 on Windows.
  *
  * The variable can be set to the following values:
- *   "0"       - SDL will generate a window-close event when it sees Alt+F4.
+ *   "0"       - SDL will generate a m_window-close event when it sees Alt+F4.
  *   "1"       - SDL will only do normal key handling for Alt+F4.
  */
 #define SDL_HINT_WINDOWS_NO_CLOSE_ON_ALT_F4 "SDL_WINDOWS_NO_CLOSE_ON_ALT_F4"
@@ -1655,24 +1655,24 @@ extern "C" {
 #define SDL_HINT_WINDOWS_USE_D3D9EX "SDL_WINDOWS_USE_D3D9EX"
 
 /**
- *  \brief  A variable controlling whether the window frame and title bar are interactive when the cursor is hidden 
+ *  \brief  A variable controlling whether the m_window frame and title bar are interactive when the cursor is hidden
  *
  *  This variable can be set to the following values:
- *    "0"       - The window frame is not interactive when the cursor is hidden (no move, resize, etc)
- *    "1"       - The window frame is interactive when the cursor is hidden
+ *    "0"       - The m_window frame is not interactive when the cursor is hidden (no move, resize, etc)
+ *    "1"       - The m_window frame is interactive when the cursor is hidden
  *
- *  By default SDL will allow interaction with the window frame when the cursor is hidden
+ *  By default SDL will allow interaction with the m_window frame when the cursor is hidden
  */
 #define SDL_HINT_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN    "SDL_WINDOW_FRAME_USABLE_WHILE_CURSOR_HIDDEN"
 
 /**
-*  \brief  A variable controlling whether the window is activated when the SDL_ShowWindow function is called 
+*  \brief  A variable controlling whether the m_window is activated when the SDL_ShowWindow function is called
 *
 *  This variable can be set to the following values:
-*    "0"       - The window is activated when the SDL_ShowWindow function is called
-*    "1"       - The window is not activated when the SDL_ShowWindow function is called
+*    "0"       - The m_window is activated when the SDL_ShowWindow function is called
+*    "1"       - The m_window is not activated when the SDL_ShowWindow function is called
 *
-*  By default SDL will activate the window when the SDL_ShowWindow function is called
+*  By default SDL will activate the m_window when the SDL_ShowWindow function is called
 */
 #define SDL_HINT_WINDOW_NO_ACTIVATION_WHEN_SHOWN    "SDL_WINDOW_NO_ACTIVATION_WHEN_SHOWN"
 
@@ -1780,7 +1780,7 @@ extern "C" {
  *
  *  If set, this _might_ increase framerate at the expense of the desktop
  *  not working as expected. Override-redirect windows aren't noticed by the
- *  window manager at all.
+ *  m_window manager at all.
  *
  *  You should probably only use this for fullscreen windows, and you probably
  *  shouldn't even use it for that. But it's here if you want to try!

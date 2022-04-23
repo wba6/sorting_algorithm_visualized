@@ -55,9 +55,9 @@ typedef struct SDL_Keysym
 /* Function prototypes */
 
 /**
- * Query the window which currently has keyboard focus.
+ * Query the m_window which currently has keyboard focus.
  *
- * \returns the window with keyboard focus.
+ * \returns the m_window with keyboard focus.
  *
  * \since This function is available since SDL 2.0.0.
  */
@@ -235,7 +235,7 @@ extern DECLSPEC SDL_Keycode SDLCALL SDL_GetKeyFromName(const char *name);
  * Start accepting Unicode text input events.
  *
  * This function will start accepting Unicode text input events in the focused
- * SDL window, and start emitting SDL_TextInputEvent (SDL_TEXTINPUT) and
+ * SDL m_window, and start emitting SDL_TextInputEvent (SDL_TEXTINPUT) and
  * SDL_TextEditingEvent (SDL_TEXTEDITING) events. Please use this function in
  * pair with SDL_StopTextInput().
  *
@@ -294,9 +294,9 @@ extern DECLSPEC void SDLCALL SDL_SetTextInputRect(SDL_Rect *rect);
 extern DECLSPEC SDL_bool SDLCALL SDL_HasScreenKeyboardSupport(void);
 
 /**
- * Check whether the screen keyboard is shown for given window.
+ * Check whether the screen keyboard is shown for given m_window.
  *
- * \param window the window for which screen keyboard should be queried
+ * \param window the m_window for which screen keyboard should be queried
  * \returns SDL_TRUE if screen keyboard is shown or SDL_FALSE if not.
  *
  * \since This function is available since SDL 2.0.0.
