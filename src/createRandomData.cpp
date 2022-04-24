@@ -1,6 +1,7 @@
 
 #include "createRandomData.h"
 #include <random>
+#include "sortingAlgorimths.h"
 createRandomData::createRandomData(SDL_Renderer *render)
     : rend(render), rectLimit(52)
 {
@@ -15,6 +16,9 @@ createRandomData::createRandomData(SDL_Renderer *render)
         rect = nullptr;
         delete rect;
     }
+    sortingAlgorimths sorter;
+    sorter.beginSort(rectangleVec);
+
 }
 createRandomData::~createRandomData() = default;
 
@@ -23,8 +27,9 @@ void createRandomData::renderRandomData()
 {
 
     SDL_SetRenderDrawColor(rend, 100, 150, 150, 255);
-    for (auto &rect: rectangleVec)
+
+    for(size_t i{0};i<rectangleVec.size();i++)
     {
-        SDL_RenderFillRect(rend, &rect->getDestRect());
+        SDL_RenderFillRect(rend,&rectangleVec.at(i)->getDestRect());
     }
 }
