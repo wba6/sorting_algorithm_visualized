@@ -9,8 +9,7 @@
 class animateMovement {
 
     animateMovement() = default;
-    void moveTo(std::vector<rectangle *> &vector,size_t currentIteration,size_t swapWidth, unsigned diration);
-
+    void moveTo(std::vector<rectangle *> &vector, size_t currentIteration, size_t swapWidth, unsigned diration);
 };
 
 

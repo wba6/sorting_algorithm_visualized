@@ -35,6 +35,7 @@ public:
 
     static unsigned int s_windowWidth;
     static unsigned int s_windowHeight;
+
 private:
     createRandomData *randData;
     bool m_isRunning;

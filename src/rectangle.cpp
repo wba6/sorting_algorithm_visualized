@@ -10,9 +10,9 @@ rectangle::rectangle(const int hieght, int interation)
      * */
 
     destRect.w = width;
-    destRect.h = (-1 *hieght);
+    destRect.h = (-1 * hieght);
     destRect.x = interation * 15;
-    destRect.y = 0 + (int)renderWindow::s_windowHeight;
+    destRect.y = 0 + (int) renderWindow::s_windowHeight;
 }
 
 rectangle::~rectangle() {}

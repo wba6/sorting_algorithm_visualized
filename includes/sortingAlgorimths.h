@@ -14,8 +14,9 @@ public:
 
     ~sortingAlgorimths() = default;
 
-    void beginSort(std::vector<rectangle*> &vector, size_t  interations);
+    void beginSort(std::vector<rectangle *> &vector, size_t interations);
     static size_t counter;
+
 private:
 };
 

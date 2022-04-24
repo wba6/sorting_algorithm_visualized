@@ -18,7 +18,8 @@ createRandomData::createRandomData(SDL_Renderer *render)
     }
     sortingAlgorimths *sorter = new sortingAlgorimths;
 }
-createRandomData::~createRandomData(){
+createRandomData::~createRandomData()
+{
     delete sorter;
 }
 
@@ -27,16 +28,17 @@ void createRandomData::renderRandomData()
 {
     static int counter;
     SDL_SetRenderDrawColor(rend, 100, 150, 150, 255);
-    if ( counter% 32)
+    if (counter % 32)
     {
-        sorter->beginSort(rectangleVec, counter/6);
+        sorter->beginSort(rectangleVec, counter / 6);
         counter++;
-    }else{
+    }
+    else
+    {
         counter++;
     }
     for (size_t i{0}; i < rectangleVec.size(); i++)
     {
         SDL_RenderFillRect(rend, &rectangleVec.at(i)->getDestRect());
-
     }
 }

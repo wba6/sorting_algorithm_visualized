@@ -18,7 +18,7 @@ public:
 private:
     std::vector<rectangle *> rectangleVec;
     SDL_Renderer *rend;
-    sortingAlgorimths* sorter;
+    sortingAlgorimths *sorter;
     size_t rectLimit;
 };
 #endif// SORTING_ALGORITHM_VISUALIZED_CREATERANDOMDATA_H

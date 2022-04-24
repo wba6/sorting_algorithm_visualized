@@ -6,11 +6,14 @@
 #include <algorithm>
 #include <iostream>
 
-void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector, size_t  interations )
+void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector, size_t interations)
 {
-    for(size_t i = 0; i<interations;i++ ){
-        for(size_t j{i+1}; j<52;j++ ){
-            if((-1*vector.at(i)->getDestRect().h) <(-1*vector.at(j)->getDestRect().h)){
+    for (size_t i = 0; i < interations; i++)
+    {
+        for (size_t j{i + 1}; j < 52; j++)
+        {
+            if ((-1 * vector.at(i)->getDestRect().h) < (-1 * vector.at(j)->getDestRect().h))
+            {
                 int temp = vector.at(i)->getDestRect().x;
                 vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
                 vector.at(j)->getDestRect().x = temp;
@@ -20,7 +23,8 @@ void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector, size_t  inte
     }
 
 
-    for(size_t i{0}; i<vector.size();i++ ){
-        std::cout<<"sorted numbers :"<<vector.at(i)->getDestRect().x/15<< " at " <<vector.at(i)->getDestRect().h<<std::endl;
+    for (size_t i{0}; i < vector.size(); i++)
+    {
+        std::cout << "sorted numbers :" << vector.at(i)->getDestRect().x / 15 << " at " << vector.at(i)->getDestRect().h << std::endl;
     }
 }
