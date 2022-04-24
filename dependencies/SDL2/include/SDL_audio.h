@@ -444,11 +444,11 @@ typedef Uint32 SDL_AudioDeviceID;
  *
  * ```c
  * // Don't do this:
- * for (int i = 0; i < SDL_GetNumAudioDevices(0); i++)
+ * for (int counter = 0; counter < SDL_GetNumAudioDevices(0); counter++)
  *
  * // do this instead:
  * const int count = SDL_GetNumAudioDevices(0);
- * for (int i = 0; i < count; ++i) { do_something_here(); }
+ * for (int counter = 0; counter < count; ++counter) { do_something_here(); }
  * ```
  *
  * \param iscapture zero to request playback devices, non-zero to request

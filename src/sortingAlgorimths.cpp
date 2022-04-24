@@ -5,9 +5,10 @@
 #include "sortingAlgorimths.h"
 #include <algorithm>
 #include <iostream>
-void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector )
+
+void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector, size_t  interations )
 {
-    for(size_t i{0}; i<52;i++ ){
+    for(size_t i = 0; i<interations;i++ ){
         for(size_t j{i+1}; j<52;j++ ){
             if((-1*vector.at(i)->getDestRect().h) <(-1*vector.at(j)->getDestRect().h)){
                 int temp = vector.at(i)->getDestRect().x;

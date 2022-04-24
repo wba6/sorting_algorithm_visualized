@@ -105,8 +105,8 @@ typedef struct SDL_GameControllerButtonBind
  *  ```c
  *  int nJoysticks = SDL_NumJoysticks();
  *  int nGameControllers = 0;
- *  for (int i = 0; i < nJoysticks; i++) {
- *      if (SDL_IsGameController(i)) {
+ *  for (int counter = 0; counter < nJoysticks; counter++) {
+ *      if (SDL_IsGameController(counter)) {
  *          nGameControllers++;
  *      }
  *  }
@@ -140,7 +140,7 @@ typedef struct SDL_GameControllerButtonBind
  * version will overwrite the one currently loaded.
  *
  * Mappings not belonging to the current platform or with no platform field
- * specified will be ignored (i.e. mappings for Linux will be ignored in
+ * specified will be ignored (counter.e. mappings for Linux will be ignored in
  * Windows, etc).
  *
  * This function will load the text database entirely in memory before

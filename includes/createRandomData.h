@@ -5,6 +5,7 @@
 
 #include "SDL.h"
 #include "rectangle.h"
+#include "sortingAlgorimths.h"
 #include <vector>
 class createRandomData {
 public:
@@ -17,6 +18,7 @@ public:
 private:
     std::vector<rectangle *> rectangleVec;
     SDL_Renderer *rend;
+    sortingAlgorimths* sorter;
     size_t rectLimit;
 };
 #endif// SORTING_ALGORITHM_VISUALIZED_CREATERANDOMDATA_H

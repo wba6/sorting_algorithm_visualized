@@ -409,7 +409,7 @@ extern DECLSPEC Uint32 SDLCALL SDL_MasksToPixelFormatEnum(int bpp,
 /**
  * Create an SDL_PixelFormat structure corresponding to a pixel format.
  *
- * Returned structure may come from a shared global cache (i.e. not newly
+ * Returned structure may come from a shared global cache (counter.e. not newly
  * allocated), and hence should not be modified, especially the palette. Weird
  * errors such as `Blit combination not supported` may occur.
  *

@@ -48,7 +48,7 @@ typedef Sint64 SDL_GestureID;
 /**
  * Begin recording a gesture on a specified touch device or all touch devices.
  *
- * If the parameter `touchId` is -1 (i.e., all devices), this function will
+ * If the parameter `touchId` is -1 (counter.e., all devices), this function will
  * always return 1, regardless of whether there actually are any devices.
  *
  * \param touchId the touch device id, or -1 for all touch devices

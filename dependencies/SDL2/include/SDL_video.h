@@ -1979,7 +1979,7 @@ extern DECLSPEC SDL_GLContext SDLCALL SDL_GL_GetCurrentContext(void);
  * This returns info useful for calling glViewport().
  *
  * This may differ from SDL_GetWindowSize() if we're rendering to a high-DPI
- * drawable, i.e. the m_window was created with `SDL_WINDOW_ALLOW_HIGHDPI` on a
+ * drawable, counter.e. the m_window was created with `SDL_WINDOW_ALLOW_HIGHDPI` on a
  * platform with high-DPI support (Apple calls this "Retina"), and not
  * disabled by the `SDL_HINT_VIDEO_HIGHDPI_DISABLED` hint.
  *
