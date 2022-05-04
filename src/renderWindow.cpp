@@ -1,7 +1,10 @@
 
 
 #include "renderWindow.h"
-
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_sdlrenderer.h"
+#include <stdio.h>
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
 renderWindow::renderWindow() : randData(nullptr) {}
@@ -50,6 +53,17 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
         m_isRunning = false;
     }
     randData = new createRandomData(renderer);
+
+    //setting up imgui
+    // Setup Dear ImGui context
+    IMGUI_CHECKVERSION();
+    ImGui::CreateContext();
+    ImGuiIO &io = ImGui::GetIO();
+    ImGui_ImplSDL2_InitForSDLRenderer(m_window, renderer);
+    ImGui_ImplSDLRenderer_Init(renderer);
+    // Setup Dear ImGui style
+    ImGui::StyleColorsDark();
+
 }
 
 void renderWindow::handleEvents()
