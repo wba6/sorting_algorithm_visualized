@@ -3,7 +3,7 @@
 #include "sortingAlgorimths.h"
 #include <random>
 createRandomData::createRandomData(SDL_Renderer *render)
-    : rend(render), rectLimit(52)
+    : m_rend(render), rectLimit(52)
 {
     std::default_random_engine generator;
     std::uniform_int_distribution<int> distribution(20, 500);
@@ -20,25 +20,26 @@ createRandomData::createRandomData(SDL_Renderer *render)
 }
 createRandomData::~createRandomData()
 {
-    delete sorter;
+    delete m_sorter;
 }
 
 
 void createRandomData::renderRandomData()
 {
-    static int counter;
-    SDL_SetRenderDrawColor(rend, 100, 150, 150, 255);
-    if (counter % 32)
+    static int s_counter;
+    SDL_SetRenderDrawColor(m_rend, 100, 150, 150, 255);
+    //runs every 32 frames
+    if (s_counter % 32)
     {
-        sorter->beginSort(rectangleVec, counter / 6);
-        counter++;
+        m_sorter->beginSort(rectangleVec, s_counter / 6);
+        s_counter++;
     }
     else
     {
-        counter++;
+        s_counter++;
     }
     for (size_t i{0}; i < rectangleVec.size(); i++)
     {
-        SDL_RenderFillRect(rend, &rectangleVec.at(i)->getDestRect());
+        SDL_RenderFillRect(m_rend, &rectangleVec.at(i)->getDestRect());
     }
 }
