@@ -78,7 +78,7 @@ void renderWindow::render()
 {
     // clear render buffer
     SDL_RenderClear(renderer);
-    //randData.renderRandomData();
+
     randData->renderRandomData();
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
