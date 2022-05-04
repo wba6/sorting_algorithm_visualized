@@ -16,7 +16,7 @@ createRandomData::createRandomData(SDL_Renderer *render)
         rect = nullptr;
         delete rect;
     }
-    sortingAlgorimths *sorter = new sortingAlgorimths;
+    m_sorter = new sortingAlgorimths;
 }
 createRandomData::~createRandomData() {
     for (int i = 0; i < rectangleVec.size(); ++i)
@@ -24,7 +24,7 @@ createRandomData::~createRandomData() {
         delete rectangleVec.at(i);
         rectangleVec.erase(rectangleVec.begin() + i);
     }
-    delete sorter;
+    delete m_sorter;
 };
 
 
