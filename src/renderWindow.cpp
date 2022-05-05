@@ -1,9 +1,10 @@
 
 
 #include "renderWindow.h"
+#include "algorithems/algorithms.h"
 #include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdlrenderer.h"
 #include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_sdlrenderer.h"
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
@@ -69,6 +70,9 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     randData = new createRandomData(renderer);
 
 
+    currentAlgo = nullptr;
+    algoMenu = new algo::algorithms_menu(currentAlgo);
+    currentAlgo = algoMenu;
 }
 
 
@@ -101,12 +105,24 @@ void renderWindow::render()
 {
 
     // Imgui render
-
     ImGui_ImplSDLRenderer_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
-    ImGui::ShowDemoWindow(&show_demo_window);
+    if(currentAlgo)
+    {
+        currentAlgo->OnUpdate(0.0f);
+        currentAlgo->OnRender();
+        ImGui::Begin("algorithms");
+        if (currentAlgo != algoMenu && ImGui::Button("<-"))
+        {
+            delete currentAlgo;
+            currentAlgo = algoMenu;
+        }
+        currentAlgo->OnImGuiRender();
+        ImGui::End();
+    }
     ImGui::Render();
+
     // Update and Render additional Platform Windows
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
