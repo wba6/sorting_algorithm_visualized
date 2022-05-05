@@ -1,6 +1,6 @@
 #include "renderWindow.h"
 
-int main(int argv, char **args)
+int main(int, char**)
 {
 
     renderWindow window;

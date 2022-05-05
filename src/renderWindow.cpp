@@ -1,7 +1,9 @@
 
 
 #include "renderWindow.h"
-
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdlrenderer.h"
+#include "imgui/imgui_impl_sdl.h"
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
@@ -9,7 +11,9 @@ renderWindow::renderWindow() : randData(nullptr) {}
 
 renderWindow::~renderWindow()
 {
-
+    ImGui_ImplSDLRenderer_Shutdown();
+    ImGui_ImplSDL2_Shutdown();
+    ImGui::DestroyContext();
     SDL_DestroyWindow(m_window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
@@ -21,15 +25,18 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
 {
     s_windowHeight = height;
     s_windowWidth = width;
-    int flags{0};
-    // checks if fullscreen is true
-    flags = fullscreen ? SDL_WINDOW_FULLSCREEN : 0;
+    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    if (fullscreen)
+    {
+        window_flags = (SDL_WindowFlags)(SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI |SDL_WINDOW_RESIZABLE);
+    }
+
     // checks to make sure that the system is initialized correctly before making
     // a m_window
     if (SDL_Init(SDL_INIT_EVERYTHING) == 0)
     {
         std::cout << "subsystem running" << std::endl;
-        m_window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+        m_window = SDL_CreateWindow(title, xpos, ypos, width, height, window_flags);
         // check if m_window was made successfully
         if (m_window)
         {
@@ -50,19 +57,20 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     {
         m_isRunning = false;
     }
-    randData = new createRandomData(renderer);
-
     //setting up imgui
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, renderer);
     ImGui_ImplSDLRenderer_Init(renderer);
     // Setup Dear ImGui style
-    ImGui::StyleColorsDark();
+    randData = new createRandomData(renderer);
+
 
 }
+
 
 void renderWindow::handleEvents()
 {
@@ -71,6 +79,7 @@ void renderWindow::handleEvents()
     SDL_Event event;
     while (SDL_PollEvent(&event) != 0)
     {
+        ImGui_ImplSDL2_ProcessEvent(&event);
         switch (event.type)
         {
             case SDL_QUIT:
@@ -79,23 +88,33 @@ void renderWindow::handleEvents()
         }
         events.push_back(event);
     }
+
 }
 
 void renderWindow::update()
 {
 }
 
-
+//TODO:Remove this
+bool show_demo_window = true;
 void renderWindow::render()
 {
-    // clear render buffer
-    SDL_RenderClear(renderer);
 
-    randData->renderRandomData();
+    // Imgui render
+
+    ImGui_ImplSDLRenderer_NewFrame();
+    ImGui_ImplSDL2_NewFrame();
+    ImGui::NewFrame();
+    ImGui::ShowDemoWindow(&show_demo_window);
+    ImGui::Render();
+    // Update and Render additional Platform Windows
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+    SDL_RenderClear(renderer);
+    //sdl renderer
+    randData->renderRandomData();
 
-    // render new stuff
+    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
     SDL_RenderPresent(renderer);
 }
 
