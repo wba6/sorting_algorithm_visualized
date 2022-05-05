@@ -43,7 +43,7 @@ private:
     bool m_isRunning;
     SDL_Window *m_window;
     algo::algorithms *currentAlgo;
-    algo::algorithms_menu* algoMenu;
+    algo::algorithms_menu *algoMenu;
 };
 
 #endif// DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

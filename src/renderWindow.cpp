@@ -26,10 +26,10 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
 {
     s_windowHeight = height;
     s_windowWidth = width;
-    SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    SDL_WindowFlags window_flags = (SDL_WindowFlags) (SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     if (fullscreen)
     {
-        window_flags = (SDL_WindowFlags)(SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI |SDL_WINDOW_RESIZABLE);
+        window_flags = (SDL_WindowFlags) (SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE);
     }
 
     // checks to make sure that the system is initialized correctly before making
@@ -62,7 +62,8 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     // Setup Dear ImGui context
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
-    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    ImGuiIO &io = ImGui::GetIO();
+    (void) io;
     ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, renderer);
     ImGui_ImplSDLRenderer_Init(renderer);
@@ -92,7 +93,6 @@ void renderWindow::handleEvents()
         }
         events.push_back(event);
     }
-
 }
 
 void renderWindow::update()
@@ -108,7 +108,7 @@ void renderWindow::render()
     ImGui_ImplSDLRenderer_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
-    if(currentAlgo)
+    if (currentAlgo)
     {
         currentAlgo->OnUpdate(0.0f);
         currentAlgo->OnRender();

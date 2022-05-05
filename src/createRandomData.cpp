@@ -1,7 +1,7 @@
 
-#include <random>
 #include "createRandomData.h"
 #include "sortingAlgorimths.h"
+#include <random>
 createRandomData::createRandomData(SDL_Renderer *render)
     : m_rend(render), rectLimit(52)
 {
@@ -18,7 +18,8 @@ createRandomData::createRandomData(SDL_Renderer *render)
     }
     m_sorter = new sortingAlgorimths;
 }
-createRandomData::~createRandomData() {
+createRandomData::~createRandomData()
+{
     for (int i = 0; i < rectangleVec.size(); ++i)
     {
         delete rectangleVec.at(i);

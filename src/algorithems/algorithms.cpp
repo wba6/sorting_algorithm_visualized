@@ -7,14 +7,14 @@
 namespace algo
 {
     algorithms_menu::algorithms_menu(algorithms *&currentAgloPointer)
-    : m_CurrentAlgo(currentAgloPointer)
+        : m_CurrentAlgo(currentAgloPointer)
     {
     }
     void algorithms_menu::OnImGuiRender()
     {
         for (const auto &algo: m_Algorithms)
         {
-            if(ImGui::Button(algo.first.c_str()))
+            if (ImGui::Button(algo.first.c_str()))
                 m_CurrentAlgo = algo.second();
         }
     }
