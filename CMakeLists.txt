@@ -4,12 +4,12 @@ project(sorting_algorithm_visualized )
 set(CMAKE_CXX_STANDARD 14)
 add_library(imgui
         # Main Imgui files
-        dependencies/imgui/imgui.cpp dependencies/imgui/imgui_draw.cpp
-        dependencies/imgui/imgui_tables.cpp dependencies/imgui/imgui_widgets.cpp
-        dependencies/imgui/imgui_demo.cpp
+        src/vender/imgui/imgui.cpp src/vender/imgui/imgui_draw.cpp
+        src/vender/imgui/imgui_tables.cpp src/vender/imgui/imgui_widgets.cpp
+        src/vender/imgui/imgui_demo.cpp
         # SDL2
-        dependencies/imgui/imgui_impl_sdl.cpp
-        dependencies/imgui/imgui_impl_sdlrenderer.cpp)
+        src/vender/imgui/imgui_impl_sdl.cpp
+        src/vender/imgui/imgui_impl_sdlrenderer.cpp)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 if(UNIX)
@@ -18,16 +18,16 @@ if(UNIX)
 endif()
 
 include_directories(${PROJECT_SOURCE_DIR}/includes)
-include_directories(${PROJECT_SOURCE_DIR}/dependencies)
+include_directories(${PROJECT_SOURCE_DIR}/src/vender)
 
 if (WIN32)
-    include_directories(${PROJECT_SOURCE_DIR}/dependencies/SDL2/include)
-    LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/dependencies/SDL2/lib/x64)
+    include_directories(src/vender/SDL2/include)
+    LINK_DIRECTORIES(src/vender/SDL2/lib/x64)
 endif ()
 
 
-add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp includes/renderWindow.h src/createRandomData.cpp
-        includes/createRandomData.h src/rectangle.cpp includes/rectangle.h src/sortingAlgorimths.cpp includes/sortingAlgorimths.h)
+add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp src/renderWindow.h src/createRandomData.cpp
+        src/createRandomData.h src/rectangle.cpp src/rectangle.h src/sortingAlgorimths.cpp src/sortingAlgorimths.h)
 
 target_link_libraries(${PROJECT_NAME}
         SDL2main
