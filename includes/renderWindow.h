@@ -3,7 +3,9 @@
 #ifndef DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H
 #define DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H
 
-
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdlrenderer.h"
+#include "imgui/imgui_impl_sdl.h"
 #include "SDL.h"
 
 #include "createRandomData.h"

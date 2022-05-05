@@ -1,10 +1,8 @@
 
 
 #include "renderWindow.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_sdlrenderer.h"
-#include <stdio.h>
+
+
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
 renderWindow::renderWindow() : randData(nullptr) {}
