@@ -9,7 +9,7 @@ add_library(imgui
         src/vender/imgui/imgui_demo.cpp
         # SDL2
         src/vender/imgui/imgui_impl_sdl.cpp
-        src/vender/imgui/imgui_impl_sdlrenderer.cpp src/algorithems/algorithms.cpp src/algorithems/algorithms.h)
+        src/vender/imgui/imgui_impl_sdlrenderer.cpp )
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14")
 if(UNIX)
@@ -27,7 +27,8 @@ endif ()
 
 
 add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp src/renderWindow.h src/createRandomData.cpp
-        src/createRandomData.h src/rectangle.cpp src/rectangle.h src/sortingAlgorimths.cpp src/sortingAlgorimths.h)
+        src/createRandomData.h src/rectangle.cpp src/rectangle.h src/sortingAlgorimths.cpp src/sortingAlgorimths.h
+        src/algorithems/algorithms.cpp src/algorithems/algorithms.h)
 
 target_link_libraries(${PROJECT_NAME}
         SDL2main
