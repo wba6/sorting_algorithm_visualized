@@ -1,7 +1,7 @@
 
 
-#ifndef SORTING_ALGORITHM_VISUALIZED_BINARYSORT_H
-#define SORTING_ALGORITHM_VISUALIZED_BINARYSORT_H
+#ifndef SORTING_ALGORITHM_VISUALIZED_INSERTIONSORT_H
+#define SORTING_ALGORITHM_VISUALIZED_INSERTIONSORT_H
 
 #include "../rectangle.h"
 #include "../sortingAlgorimths.h"
@@ -9,9 +9,9 @@
 #include <vector>
 #include "algorithms.h"
 namespace algo{
-    class binarySort: public algorithms {
+    class insertionSort : public algorithms {
     public:
-        binarySort();
+        insertionSort();
 
         void OnRender(SDL_Renderer *&m_rend) override;
         void OnImGuiRender() override;
@@ -19,7 +19,7 @@ namespace algo{
         void generateRandNum() override;
         void beginSort(std::vector<rectangle *> &vector, size_t interations);
 
-        ~binarySort() override;
+        ~insertionSort() override;
 
     private:
          int sort_speed;
@@ -28,4 +28,4 @@ namespace algo{
     };
 }//namespace algo
 
-#endif// SORTING_ALGORITHM_VISUALIZED_BINARYSORT_H
+#endif// SORTING_ALGORITHM_VISUALIZED_INSERTIONSORT_H

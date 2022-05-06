@@ -26,8 +26,8 @@ if (WIN32)
 endif ()
 
 
-add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp src/renderWindow.h src/algorithems/binarySort.cpp
-        src/algorithems/binarySort.h src/rectangle.cpp src/rectangle.h src/sortingAlgorimths.cpp src/sortingAlgorimths.h
+add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp src/renderWindow.h src/algorithems/insertionSort.cpp
+        src/algorithems/insertionSort.h src/rectangle.cpp src/rectangle.h src/sortingAlgorimths.cpp src/sortingAlgorimths.h
         src/algorithems/algorithms.cpp src/algorithems/algorithms.h)
 
 target_link_libraries(${PROJECT_NAME}

@@ -7,7 +7,7 @@
 #include "SDL.h"
 
 #include "algorithems/algorithms.h"
-#include "algorithems/binarySort.h"
+#include "algorithems/insertionSort.h"
 #include <iostream>
 #include <vector>
 
