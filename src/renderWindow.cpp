@@ -8,7 +8,7 @@
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
-renderWindow::renderWindow() : randData(nullptr) {}
+renderWindow::renderWindow()  {}
 
 renderWindow::~renderWindow()
 {
@@ -67,13 +67,13 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     ImGui::StyleColorsDark();
     ImGui_ImplSDL2_InitForSDLRenderer(m_window, renderer);
     ImGui_ImplSDLRenderer_Init(renderer);
-    // Setup Dear ImGui style
-    randData = new createRandomData(renderer);
 
 
     currentAlgo = nullptr;
     algoMenu = new algo::algorithms_menu(currentAlgo);
     currentAlgo = algoMenu;
+    algoMenu->RegisterAlgorithm<algo::binarySort>("Binary Sort");
+
 }
 
 
@@ -105,13 +105,14 @@ void renderWindow::render()
 {
 
     // Imgui render
+    SDL_RenderClear(renderer);
     ImGui_ImplSDLRenderer_NewFrame();
     ImGui_ImplSDL2_NewFrame();
     ImGui::NewFrame();
     if (currentAlgo)
     {
         currentAlgo->OnUpdate(0.0f);
-        currentAlgo->OnRender();
+        currentAlgo->OnRender(renderer);
         ImGui::Begin("algorithms");
         if (currentAlgo != algoMenu && ImGui::Button("<-"))
         {
@@ -126,9 +127,7 @@ void renderWindow::render()
     // Update and Render additional Platform Windows
 
     SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    SDL_RenderClear(renderer);
     //sdl renderer
-    randData->renderRandomData();
 
     ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
     SDL_RenderPresent(renderer);

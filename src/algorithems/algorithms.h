@@ -5,6 +5,7 @@
 #ifndef SORTING_ALGORITHM_VISUALIZED_ALGORITHMS_H
 #define SORTING_ALGORITHM_VISUALIZED_ALGORITHMS_H
 #include "iostream"
+#include <SDL_render.h>
 #include <functional>
 #include <vector>
 namespace algo
@@ -12,11 +13,12 @@ namespace algo
 
     class algorithms {
     public:
-        algorithms() {}
+        algorithms(){}
         virtual ~algorithms() {}
 
         virtual void OnUpdate(float deltaTime){};
-        virtual void OnRender(){};
+        virtual void OnRender(SDL_Renderer *&rend){};
+        virtual void generateRandNum(){};
         virtual void OnImGuiRender(){};
     };
 

@@ -16,6 +16,7 @@ namespace algo
         {
             if (ImGui::Button(algo.first.c_str()))
                 m_CurrentAlgo = algo.second();
+                m_CurrentAlgo->generateRandNum();
         }
     }
 }// namespace algo

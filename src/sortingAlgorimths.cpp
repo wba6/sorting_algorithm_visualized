@@ -6,6 +6,7 @@
 #include <algorithm>
 #include <iostream>
 
+
 void sortingAlgorimths::beginSort(std::vector<rectangle *> &vector, size_t interations)
 {
     for (size_t i = 0; i < interations; i++)

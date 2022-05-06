@@ -7,7 +7,7 @@
 #include "SDL.h"
 
 #include "algorithems/algorithms.h"
-#include "createRandomData.h"
+#include "algorithems/binarySort.h"
 #include <iostream>
 #include <vector>
 
@@ -39,7 +39,6 @@ public:
     static unsigned int s_windowHeight;
 
 private:
-    createRandomData *randData;
     bool m_isRunning;
     SDL_Window *m_window;
     algo::algorithms *currentAlgo;
