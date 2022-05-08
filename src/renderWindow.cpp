@@ -8,7 +8,7 @@
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
-renderWindow::renderWindow()  {}
+renderWindow::renderWindow() {}
 
 renderWindow::~renderWindow()
 {
@@ -73,7 +73,6 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     algoMenu = new algo::algorithms_menu(currentAlgo);
     currentAlgo = algoMenu;
     algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
-
 }
 
 

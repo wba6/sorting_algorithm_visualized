@@ -13,7 +13,7 @@ namespace algo
 
     class algorithms {
     public:
-        algorithms(){}
+        algorithms() {}
         virtual ~algorithms() {}
 
         virtual void OnUpdate(float deltaTime){};
