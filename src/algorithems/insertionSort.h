@@ -6,23 +6,24 @@
 #include "../rectangle.h"
 #include "../sortingAlgorimths.h"
 #include "SDL.h"
-#include <vector>
 #include "algorithms.h"
-namespace algo{
+#include <vector>
+namespace algo
+{
     class insertionSort : public algorithms {
     public:
         insertionSort();
 
         void OnRender(SDL_Renderer *&m_rend) override;
         void OnImGuiRender() override;
-        void Reset() ;
+        void Reset();
         void generateRandNum() override;
         void beginSort(std::vector<rectangle *> &vector, size_t interations);
 
         ~insertionSort() override;
 
     private:
-         int sort_speed;
+        int sort_speed;
         std::vector<rectangle *> rectangleVec;
         size_t rectLimit;
     };

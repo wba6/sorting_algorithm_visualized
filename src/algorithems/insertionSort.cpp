@@ -7,9 +7,9 @@
 namespace algo
 {
     insertionSort::insertionSort()
-        :  rectLimit(52), sort_speed(0)
+        : rectLimit(52), sort_speed(0)
     {
-      generateRandNum();
+        generateRandNum();
     }
     insertionSort::~insertionSort()
     {
@@ -52,7 +52,7 @@ namespace algo
                     int temp = vector.at(i)->getDestRect().x;
                     vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
                     vector.at(j)->getDestRect().x = temp;
-                    iter_swap(vector.begin() + (int)i, vector.begin() + (int)j);
+                    iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace algo
     }
     void insertionSort::Reset()
     {
-        for (int i = rectangleVec.size()-1; i >=0; --i)
+        for (int i = rectangleVec.size() - 1; i >= 0; --i)
         {
             delete rectangleVec.at(i);
         }
@@ -91,4 +91,4 @@ namespace algo
             delete rect;
         }
     }
-} // namespace algo
+}// namespace algo
