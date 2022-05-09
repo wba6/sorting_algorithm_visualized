@@ -8,6 +8,7 @@
 
 #include "algorithems/algorithms.h"
 #include "algorithems/insertionSort.h"
+#include "algorithems/quickSort.h"
 #include <iostream>
 #include <vector>
 
@@ -29,6 +30,7 @@ public:
     bool running();
 
     void restart();
+
 
     SDL_Window *getWindow() const;
 

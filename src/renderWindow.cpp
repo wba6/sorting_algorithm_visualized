@@ -1,6 +1,7 @@
 
 
 #include "renderWindow.h"
+
 #include "algorithems/algorithms.h"
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_sdl.h"
@@ -73,8 +74,11 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     algoMenu = new algo::algorithms_menu(currentAlgo);
     currentAlgo = algoMenu;
     algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
+    algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
 
 }
+
+
 
 
 void renderWindow::handleEvents()
@@ -105,6 +109,8 @@ void renderWindow::render()
 {
 
     // Imgui render
+
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
     SDL_RenderClear(renderer);
     ImGui_ImplSDLRenderer_NewFrame();
     ImGui_ImplSDL2_NewFrame();
