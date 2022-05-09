@@ -56,6 +56,8 @@ namespace algo
         for (int j = low; j <= high - 1; j++)
         {
             // If current element is smaller than the pivot
+            ObjectRender::visualize(vector, j,i,m_rend);
+            SDL_Delay(50);
             if ((-1 * vector.at(j)->getDestRect().h) > pivot)
             {
                 i++; // increment index of smaller element
@@ -63,8 +65,6 @@ namespace algo
                 vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
                 vector.at(j)->getDestRect().x = temp;
                 iter_swap(vector.begin() + (int)i, vector.begin() + (int)j);
-                ObjectRender::visualize(vector, j,i,m_rend);
-                SDL_Delay(50);
             }
         }
         iter_swap(vector.begin() + (int)i + 1, vector.begin() + (int)high);
