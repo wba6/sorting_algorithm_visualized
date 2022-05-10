@@ -74,7 +74,6 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     currentAlgo = algoMenu;
     algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
     algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
-
 }
 
 

@@ -7,25 +7,26 @@
 #include "../rectangle.h"
 #include "../sortingAlgorimths.h"
 #include "SDL.h"
-#include <vector>
 #include "algorithms.h"
+#include <vector>
 
 namespace algo
 {
 
-    class quickSort : public algorithms{
+    class quickSort : public algorithms {
     public:
         quickSort();
 
         void OnRender(SDL_Renderer *&m_rend) override;
         void OnImGuiRender() override;
-        void Reset() ;
+        void Reset();
         void generateRandNum() override;
         void beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend);
         int partition(std::vector<rectangle *> &vector, int start, int end, SDL_Renderer *&m_rend);
         void quickSortAlgo(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend);
 
         ~quickSort() override;
+
     private:
         bool done;
         int sort_speed;

@@ -3,13 +3,13 @@
 //
 
 #include "quickSort.h"
-#include "imgui/imgui.h"
 #include "../ObjectRender.h"
+#include "imgui/imgui.h"
 #include <random>
 namespace algo
 {
     quickSort::quickSort()
-        :  rectLimit(52), sort_speed(0),done(false)
+        : rectLimit(52), sort_speed(0), done(false)
     {
         generateRandNum();
     }
@@ -28,9 +28,9 @@ namespace algo
     {
 
         //runs every 32 frames
-        if ( !done)
+        if (!done)
         {
-            beginSort(rectangleVec, 51,m_rend);
+            beginSort(rectangleVec, 51, m_rend);
         }
 
         for (size_t i{0}; i < rectangleVec.size(); i++)
@@ -40,34 +40,33 @@ namespace algo
         }
         //beginSort(rectangleVec, 51,m_rend);
     }
-    void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations,SDL_Renderer *&m_rend)
+    void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
-        int n = (int)vector.size();
-        quickSortAlgo(vector, 0, n - 1,m_rend);
+        int n = (int) vector.size();
+        quickSortAlgo(vector, 0, n - 1, m_rend);
 
         done = true;
-
     }
-    int quickSort::partition (std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)
+    int quickSort::partition(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)
     {
-        int pivot = (-1 * vector.at(high)->getDestRect().h); // pivot
-        int i = (low - 1); // Index of smaller element and indicates the right position of pivot found so far
+        int pivot = (-1 * vector.at(high)->getDestRect().h);// pivot
+        int i = (low - 1);                                  // Index of smaller element and indicates the right position of pivot found so far
 
         for (int j = low; j <= high - 1; j++)
         {
             // If current element is smaller than the pivot
-            ObjectRender::visualize(vector, j,i,m_rend);
+            ObjectRender::visualize(vector, j, i, m_rend);
             SDL_Delay(50);
             if ((-1 * vector.at(j)->getDestRect().h) > pivot)
             {
-                i++; // increment index of smaller element
+                i++;// increment index of smaller element
                 int temp = vector.at(i)->getDestRect().x;
                 vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
                 vector.at(j)->getDestRect().x = temp;
-                iter_swap(vector.begin() + (int)i, vector.begin() + (int)j);
+                iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
             }
         }
-        iter_swap(vector.begin() + (int)i + 1, vector.begin() + (int)high);
+        iter_swap(vector.begin() + (int) i + 1, vector.begin() + (int) high);
         return (i + 1);
     }
 
@@ -75,10 +74,10 @@ namespace algo
     {
         if (low < high)
         {
-            int pi = partition(vector, low, high,m_rend);
+            int pi = partition(vector, low, high, m_rend);
 
-            quickSortAlgo(vector, low, pi - 1,m_rend);
-            quickSortAlgo(vector, pi + 1, high,m_rend);
+            quickSortAlgo(vector, low, pi - 1, m_rend);
+            quickSortAlgo(vector, pi + 1, high, m_rend);
         }
     }
 
@@ -89,7 +88,7 @@ namespace algo
     }
     void quickSort::Reset()
     {
-        for (int i = (int)rectangleVec.size()-1; i >=0; --i)
+        for (int i = (int) rectangleVec.size() - 1; i >= 0; --i)
         {
             delete rectangleVec.at(i);
         }
