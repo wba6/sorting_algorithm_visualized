@@ -5,14 +5,42 @@
 #ifndef SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H
 #define SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H
 #include "SDL.h"
+#include "algorithems/algorithms.h"
+#include "algorithems/insertionSort.h"
+#include "algorithems/quickSort.h"
+#include "imgui/imgui.h"
+#include "imgui/imgui_impl_sdl.h"
+#include "imgui/imgui_impl_sdlrenderer.h"
 #include "rectangle.h"
 #include <vector>
 class ObjectRender {
 public:
+    static void initImgui(SDL_Renderer *&renderer, SDL_Window*& window){
+
+        IMGUI_CHECKVERSION();
+        ImGui::CreateContext();
+        ImGuiIO &io = ImGui::GetIO();
+        (void) io;
+        ImGui::StyleColorsDark();
+        ImGui_ImplSDL2_InitForSDLRenderer(window, renderer);
+        ImGui_ImplSDLRenderer_Init(renderer);
+
+        s_currentAlgo = nullptr;
+        s_algoMenu = new algo::algorithms_menu(s_currentAlgo);
+        s_currentAlgo = s_algoMenu;
+        s_algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
+        s_algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
+
+    }
+    static void shutDownImgui()
+    {
+        ImGui_ImplSDLRenderer_Shutdown();
+        ImGui_ImplSDL2_Shutdown();
+        ImGui::DestroyContext();
+    }
     static void visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex, SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
-        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
 
         for (size_t i{0}; i < rects.size(); i++)
@@ -32,13 +60,47 @@ public:
             SDL_RenderFillRect(renderer, &rects.at(i)->getDestRect());
         }
 
+
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
 
         SDL_RenderPresent(renderer);
+    }
+    static void completeRender(SDL_Renderer *&renderer){
+
+        // Imgui render
+        SDL_RenderClear(renderer);
+        ImGui_ImplSDLRenderer_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+        if (s_currentAlgo)
+        {
+            s_currentAlgo->OnUpdate(0.0f);
+            s_currentAlgo->OnRender(renderer);
+            ImGui::Begin("algorithms");
+            if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
+            {
+                delete s_currentAlgo;
+                s_currentAlgo = s_algoMenu;
+            }
+            s_currentAlgo->OnImGuiRender();
+            ImGui::End();
+        }
+        ImGui::Render();
+
+        // Update and Render additional Platform Windows
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
+        //sdl renderer
+
+        ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+        SDL_RenderPresent(renderer);
+
     }
 
 private:
     ObjectRender() = delete;
     ~ObjectRender() = delete;
+   static algo::algorithms *s_currentAlgo;
+   static  algo::algorithms_menu *s_algoMenu;
 };
 #endif//SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H

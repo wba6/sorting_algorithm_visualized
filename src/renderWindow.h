@@ -5,10 +5,6 @@
 
 
 #include "SDL.h"
-
-#include "algorithems/algorithms.h"
-#include "algorithems/insertionSort.h"
-#include "algorithems/quickSort.h"
 #include <iostream>
 #include <vector>
 
@@ -43,8 +39,7 @@ public:
 private:
     bool m_isRunning;
     SDL_Window *m_window;
-    algo::algorithms *currentAlgo;
-    algo::algorithms_menu *algoMenu;
+
 };
 
 #endif// DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

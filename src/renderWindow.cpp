@@ -1,10 +1,8 @@
 
 
 #include "renderWindow.h"
-#include "algorithems/algorithms.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui_impl_sdl.h"
-#include "imgui/imgui_impl_sdlrenderer.h"
+#include "ObjectRender.h"
+
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
@@ -12,9 +10,7 @@ renderWindow::renderWindow() {}
 
 renderWindow::~renderWindow()
 {
-    ImGui_ImplSDLRenderer_Shutdown();
-    ImGui_ImplSDL2_Shutdown();
-    ImGui::DestroyContext();
+    ObjectRender::shutDownImgui();
     SDL_DestroyWindow(m_window);
     SDL_DestroyRenderer(renderer);
     SDL_Quit();
@@ -60,20 +56,9 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     }
     //setting up imgui
     // Setup Dear ImGui context
-    IMGUI_CHECKVERSION();
-    ImGui::CreateContext();
-    ImGuiIO &io = ImGui::GetIO();
-    (void) io;
-    ImGui::StyleColorsDark();
-    ImGui_ImplSDL2_InitForSDLRenderer(m_window, renderer);
-    ImGui_ImplSDLRenderer_Init(renderer);
 
+    ObjectRender::initImgui(renderer, m_window);
 
-    currentAlgo = nullptr;
-    algoMenu = new algo::algorithms_menu(currentAlgo);
-    currentAlgo = algoMenu;
-    algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
-    algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
 }
 
 
@@ -104,33 +89,10 @@ bool show_demo_window = true;
 void renderWindow::render()
 {
 
-    // Imgui render
-    SDL_RenderClear(renderer);
-    ImGui_ImplSDLRenderer_NewFrame();
-    ImGui_ImplSDL2_NewFrame();
-    ImGui::NewFrame();
-    if (currentAlgo)
-    {
-        currentAlgo->OnUpdate(0.0f);
-        currentAlgo->OnRender(renderer);
-        ImGui::Begin("algorithms");
-        if (currentAlgo != algoMenu && ImGui::Button("<-"))
-        {
-            delete currentAlgo;
-            currentAlgo = algoMenu;
-        }
-        currentAlgo->OnImGuiRender();
-        ImGui::End();
-    }
-    ImGui::Render();
+    ObjectRender::completeRender(renderer);
 
     // Update and Render additional Platform Windows
 
-    SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-    //sdl renderer
-
-    ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
-    SDL_RenderPresent(renderer);
 }
 
 bool renderWindow::running() { return m_isRunning; }
