@@ -1,6 +1,7 @@
 
 
 #include "renderWindow.h"
+#include "EventHandler.h"
 #include "ObjectRender.h"
 
 
@@ -58,26 +59,13 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     // Setup Dear ImGui context
 
     ObjectRender::initImgui(renderer, m_window);
-
+    EventHandler::initEvents(this);
 }
 
 
 void renderWindow::handleEvents()
 {
-    // gets events
-    events.clear();
-    SDL_Event event;
-    while (SDL_PollEvent(&event) != 0)
-    {
-        ImGui_ImplSDL2_ProcessEvent(&event);
-        switch (event.type)
-        {
-            case SDL_QUIT:
-                m_isRunning = false;
-                break;
-        }
-        events.push_back(event);
-    }
+    EventHandler::HandleEvents();
 }
 
 void renderWindow::update()
@@ -90,7 +78,8 @@ void renderWindow::render()
 {
 
     ObjectRender::completeRender(renderer);
-
+    //ObjectRender::endVisualize(renderer);
+    //ObjectRender::beginVisualize(renderer);
     // Update and Render additional Platform Windows
 
 }

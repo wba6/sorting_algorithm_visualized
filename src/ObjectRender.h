@@ -4,6 +4,7 @@
 
 #ifndef SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H
 #define SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H
+#include "EventHandler.h"
 #include "SDL.h"
 #include "algorithems/algorithms.h"
 #include "algorithems/insertionSort.h"
@@ -38,11 +39,32 @@ public:
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
     }
-    static void visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex, SDL_Renderer *&renderer)
+    static void endVisualize(SDL_Renderer *&renderer)
+    {
+
+
+
+        ImGui::Begin("algorithms");
+        if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
+        {
+            delete s_currentAlgo;
+            s_currentAlgo = s_algoMenu;
+        }
+        s_currentAlgo->OnImGuiRender();
+        ImGui::End();
+
+        ImGui::Render();
+
+        SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
+        ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
+        SDL_RenderPresent(renderer);
+    }
+
+    static bool visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex, SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
 
-
+        auto instanceName = s_currentAlgo;
         for (size_t i{0}; i < rects.size(); i++)
         {
             if (i == compareIndex)
@@ -59,36 +81,59 @@ public:
             }
             SDL_RenderFillRect(renderer, &rects.at(i)->getDestRect());
         }
+        EventHandler::HandleEvents();
+        ObjectRender::imguiRender(renderer, true);
+//        ImGui_ImplSDLRenderer_NewFrame();
+//        ImGui_ImplSDL2_NewFrame();
+//        ImGui::NewFrame();
+//        if (s_currentAlgo)
+//        {
+//            s_currentAlgo->OnUpdate(0.0f);
+//            s_currentAlgo->OnRender(renderer);
+//            ImGui::Begin("algorithms");
+//            if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
+//            {
+//                delete s_currentAlgo;
+//                s_currentAlgo = s_algoMenu;
+//            }
+//            s_currentAlgo->OnImGuiRender();
+//            ImGui::End();
+//        }
+//        ImGui::Render();
 
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
-
+        ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);
+        if(instanceName != s_currentAlgo)
+        {
+            return true;
+        }else{
+            return false;
+        }
     }
+    static void beginVisualize(SDL_Renderer *&renderer)
+    {
+        SDL_RenderClear(renderer);
+
+
+
+
+        ImGui_ImplSDLRenderer_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+
+
+    }
+
     static void completeRender(SDL_Renderer *&renderer){
 
         // Imgui render
         SDL_RenderClear(renderer);
-        ImGui_ImplSDLRenderer_NewFrame();
-        ImGui_ImplSDL2_NewFrame();
-        ImGui::NewFrame();
-        if (s_currentAlgo)
-        {
-            s_currentAlgo->OnUpdate(0.0f);
-            s_currentAlgo->OnRender(renderer);
-            ImGui::Begin("algorithms");
-            if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
-            {
-                delete s_currentAlgo;
-                s_currentAlgo = s_algoMenu;
-            }
-            s_currentAlgo->OnImGuiRender();
-            ImGui::End();
-        }
-        ImGui::Render();
+
 
         // Update and Render additional Platform Windows
-
+        ObjectRender::imguiRender(renderer, false);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
         //sdl renderer
 
@@ -97,6 +142,30 @@ public:
 
     }
 
+    static void imguiRender(SDL_Renderer *&renderer, bool inBeaded)
+    {
+        ImGui_ImplSDLRenderer_NewFrame();
+        ImGui_ImplSDL2_NewFrame();
+        ImGui::NewFrame();
+        if (s_currentAlgo)
+        {
+            if(!inBeaded){
+                s_currentAlgo->OnUpdate(0.0f);
+                s_currentAlgo->OnRender(renderer);
+            }
+
+            ImGui::Begin("algorithms");
+            if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
+            {
+                delete s_currentAlgo;
+                s_currentAlgo = s_algoMenu;
+            }
+
+            s_currentAlgo->OnImGuiRender();
+            ImGui::End();
+        }
+        ImGui::Render();
+    }
 private:
     ObjectRender() = delete;
     ~ObjectRender() = delete;

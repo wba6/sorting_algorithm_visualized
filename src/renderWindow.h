@@ -31,13 +31,12 @@ public:
     SDL_Window *getWindow() const;
 
     SDL_Renderer *renderer;
-    std::vector<SDL_Event> events;
 
     static unsigned int s_windowWidth;
     static unsigned int s_windowHeight;
 
-private:
     bool m_isRunning;
+private:
     SDL_Window *m_window;
 
 };
