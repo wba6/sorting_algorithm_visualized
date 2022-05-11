@@ -18,7 +18,7 @@ namespace algo
         void OnImGuiRender() override;
         void Reset();
         void generateRandNum() override;
-        void beginSort(std::vector<rectangle *> &vector, size_t interations);
+        void beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend);
 
         ~insertionSort() override;
 
@@ -26,6 +26,7 @@ namespace algo
         int sort_speed;
         std::vector<rectangle *> rectangleVec;
         size_t rectLimit;
+        bool done;
     };
 }//namespace algo
 

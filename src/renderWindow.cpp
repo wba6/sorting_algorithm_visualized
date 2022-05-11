@@ -78,10 +78,9 @@ void renderWindow::render()
 {
 
     ObjectRender::completeRender(renderer);
-    //ObjectRender::endVisualize(renderer);
-    //ObjectRender::beginVisualize(renderer);
+    //ObjectRender::catchFrameVisualize(renderer);
+    //ObjectRender::releaseFrameVisualize(renderer);
     // Update and Render additional Platform Windows
-
 }
 
 bool renderWindow::running() { return m_isRunning; }

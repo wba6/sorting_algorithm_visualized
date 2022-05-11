@@ -1,5 +1,6 @@
 
 #include "insertionSort.h"
+#include "../ObjectRender.h"
 #include "../sortingAlgorimths.h"
 #include "imgui/imgui.h"
 #include <iostream>
@@ -7,7 +8,7 @@
 namespace algo
 {
     insertionSort::insertionSort()
-        : rectLimit(52), sort_speed(0)
+        : rectLimit(52), sort_speed(0),done(false)
     {
         generateRandNum();
     }
@@ -24,29 +25,31 @@ namespace algo
 
     void insertionSort::OnRender(SDL_Renderer *&m_rend)
     {
-
-        SDL_SetRenderDrawColor(m_rend, 100, 150, 150, 255);
-        //runs every 32 frames
-        if (sort_speed % 32)
-        {
-            beginSort(rectangleVec, sort_speed / 6);
-            sort_speed++;
-        }
-        else
-        {
-            sort_speed++;
-        }
+        SDL_SetRenderDrawColor(m_rend,0,0,255,255);
         for (size_t i{0}; i < rectangleVec.size(); i++)
         {
             SDL_RenderFillRect(m_rend, &rectangleVec.at(i)->getDestRect());
         }
+        ObjectRender::catchFrameVisualize(m_rend);
+
+        if(!done){
+            beginSort(rectangleVec,  51, m_rend);
+        }
+
+        done = true;
+        ObjectRender::releaseFrameVisualize(m_rend);
     }
-    void insertionSort::beginSort(std::vector<rectangle *> &vector, size_t interations)
+    void insertionSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
         for (size_t i = 0; i < interations; i++)
         {
             for (size_t j{i + 1}; j < 52; j++)
             {
+                if(ObjectRender::visualize(vector, j,i, m_rend)){
+                    done = true;
+                    return;
+                }
+                SDL_Delay(50);
                 if ((-1 * vector.at(i)->getDestRect().h) < (-1 * vector.at(j)->getDestRect().h))
                 {
                     int temp = vector.at(i)->getDestRect().x;
@@ -75,6 +78,7 @@ namespace algo
             delete rectangleVec.at(i);
         }
         rectangleVec.clear();
+        done = false;
     }
     void insertionSort::generateRandNum()
     {

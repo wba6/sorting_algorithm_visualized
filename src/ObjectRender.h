@@ -16,7 +16,8 @@
 #include <vector>
 class ObjectRender {
 public:
-    static void initImgui(SDL_Renderer *&renderer, SDL_Window*& window){
+    static void initImgui(SDL_Renderer *&renderer, SDL_Window *&window)
+    {
 
         IMGUI_CHECKVERSION();
         ImGui::CreateContext();
@@ -31,7 +32,6 @@ public:
         s_currentAlgo = s_algoMenu;
         s_algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
         s_algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
-
     }
     static void shutDownImgui()
     {
@@ -39,9 +39,8 @@ public:
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
     }
-    static void endVisualize(SDL_Renderer *&renderer)
+    static void catchFrameVisualize(SDL_Renderer *&renderer)
     {
-
 
 
         ImGui::Begin("algorithms");
@@ -83,50 +82,33 @@ public:
         }
         EventHandler::HandleEvents();
         ObjectRender::imguiRender(renderer, true);
-//        ImGui_ImplSDLRenderer_NewFrame();
-//        ImGui_ImplSDL2_NewFrame();
-//        ImGui::NewFrame();
-//        if (s_currentAlgo)
-//        {
-//            s_currentAlgo->OnUpdate(0.0f);
-//            s_currentAlgo->OnRender(renderer);
-//            ImGui::Begin("algorithms");
-//            if (s_currentAlgo != s_algoMenu && ImGui::Button("<-"))
-//            {
-//                delete s_currentAlgo;
-//                s_currentAlgo = s_algoMenu;
-//            }
-//            s_currentAlgo->OnImGuiRender();
-//            ImGui::End();
-//        }
-//        ImGui::Render();
+
 
 
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);
-        if(instanceName != s_currentAlgo)
+        if (instanceName != s_currentAlgo)
         {
             return true;
-        }else{
+        }
+        else
+        {
             return false;
         }
     }
-    static void beginVisualize(SDL_Renderer *&renderer)
+    static void releaseFrameVisualize(SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
-
-
 
 
         ImGui_ImplSDLRenderer_NewFrame();
         ImGui_ImplSDL2_NewFrame();
         ImGui::NewFrame();
-
-
     }
 
-    static void completeRender(SDL_Renderer *&renderer){
+    static void completeRender(SDL_Renderer *&renderer)
+    {
 
         // Imgui render
         SDL_RenderClear(renderer);
@@ -139,7 +121,6 @@ public:
 
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);
-
     }
 
     static void imguiRender(SDL_Renderer *&renderer, bool inBeaded)
@@ -149,7 +130,8 @@ public:
         ImGui::NewFrame();
         if (s_currentAlgo)
         {
-            if(!inBeaded){
+            if (!inBeaded)
+            {
                 s_currentAlgo->OnUpdate(0.0f);
                 s_currentAlgo->OnRender(renderer);
             }
@@ -166,10 +148,11 @@ public:
         }
         ImGui::Render();
     }
+
 private:
     ObjectRender() = delete;
     ~ObjectRender() = delete;
-   static algo::algorithms *s_currentAlgo;
-   static  algo::algorithms_menu *s_algoMenu;
+    static algo::algorithms *s_currentAlgo;
+    static algo::algorithms_menu *s_algoMenu;
 };
 #endif//SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H

@@ -36,9 +36,9 @@ public:
     static unsigned int s_windowHeight;
 
     bool m_isRunning;
+
 private:
     SDL_Window *m_window;
-
 };
 
 #endif// DATA_STRUCTURES_VISUALIZED_RENDERWINDOW_H

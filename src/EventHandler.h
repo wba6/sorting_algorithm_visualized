@@ -13,12 +13,12 @@
 
 class EventHandler {
 public:
-
-    static void initEvents(renderWindow* window)
+    static void initEvents(renderWindow *window)
     {
         instance = window;
     }
-    static void HandleEvents(){
+    static void HandleEvents()
+    {
         // gets events
         events.clear();
         SDL_Event event;
@@ -34,8 +34,9 @@ public:
             events.push_back(event);
         }
     }
+
 private:
-    static renderWindow* instance;
+    static renderWindow *instance;
     static std::vector<SDL_Event> events;
 
     EventHandler();
