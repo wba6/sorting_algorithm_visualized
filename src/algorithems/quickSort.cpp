@@ -77,7 +77,6 @@ namespace algo
             iter_swap(vector.begin() + (int) i + 1, vector.begin() + (int) high);
         }
         return (i + 1);
-
     }
 
     void quickSort::quickSortAlgo(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)

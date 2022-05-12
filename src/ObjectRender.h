@@ -84,7 +84,6 @@ public:
         ObjectRender::imguiRender(renderer, true);
 
 
-
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0);
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);

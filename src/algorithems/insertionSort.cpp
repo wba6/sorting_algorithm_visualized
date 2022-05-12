@@ -8,7 +8,7 @@
 namespace algo
 {
     insertionSort::insertionSort()
-        : rectLimit(52), sort_speed(0),done(false)
+        : rectLimit(52), sort_speed(0), done(false)
     {
         generateRandNum();
     }
@@ -25,15 +25,16 @@ namespace algo
 
     void insertionSort::OnRender(SDL_Renderer *&m_rend)
     {
-        SDL_SetRenderDrawColor(m_rend,0,0,255,255);
+        SDL_SetRenderDrawColor(m_rend, 0, 0, 255, 255);
         for (size_t i{0}; i < rectangleVec.size(); i++)
         {
             SDL_RenderFillRect(m_rend, &rectangleVec.at(i)->getDestRect());
         }
         ObjectRender::catchFrameVisualize(m_rend);
 
-        if(!done){
-            beginSort(rectangleVec,  51, m_rend);
+        if (!done)
+        {
+            beginSort(rectangleVec, 51, m_rend);
         }
 
         done = true;
@@ -45,7 +46,8 @@ namespace algo
         {
             for (size_t j{i + 1}; j < 52; j++)
             {
-                if(ObjectRender::visualize(vector, j,i, m_rend)){
+                if (ObjectRender::visualize(vector, j, i, m_rend))
+                {
                     done = true;
                     return;
                 }
