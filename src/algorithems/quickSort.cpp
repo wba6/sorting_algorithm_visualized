@@ -44,17 +44,16 @@ namespace algo
     }
     void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
-        int n = (int) vector.size();
-        quickSortAlgo(vector, 0, n - 1, m_rend);
+        quickSortAlgo(vector, 0, (int)vector.size() -1, m_rend);
 
         done = true;
     }
     int quickSort::partition(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)
     {
-        int pivot = (-1 * vector.at(high)->getDestRect().h);// pivot
-        int i = (low - 1);                                  //-1                                  // Index of smaller element and indicates the right position of pivot found so far
+        int pivot = -1*vector.at(high)->getDestRect().h;    // pivot
+        int i = (low - 1);
 
-        for (int j = low; j <= high - 1; j++)
+        for (int j = low; j <= high- 1; j++)
         {
             // If current element is smaller than the pivot
             if (ObjectRender::visualize(vector, j, i, m_rend))
@@ -62,19 +61,17 @@ namespace algo
                 done = true;
                 break;
             }
-            SDL_Delay(sort_speed);
-            if ((-1 * vector.at(j)->getDestRect().h) > pivot)
+            SDL_Delay(100-sort_speed);
+            if ((-1*vector.at(j)->getDestRect().h) >= pivot)
             {
-                i++;// increment index of smaller element
-                int temp = vector.at(i)->getDestRect().x;
-                vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
-                vector.at(j)->getDestRect().x = temp;
+                i++;
+                std::swap(vector.at(j)->getDestRect().x,vector.at(i)->getDestRect().x);
                 iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
             }
         }
-        if (!done)
-        {
-            iter_swap(vector.begin() + (int) i + 1, vector.begin() + (int) high);
+        if(!done){
+
+            iter_swap(vector.begin() + (int) i+1, vector.begin() + (int) high);
         }
         return (i + 1);
     }
@@ -83,15 +80,16 @@ namespace algo
     {
         if (low < high)
         {
-            int pi = partition(vector, low, high, m_rend);
 
-            if (!done)
-            {
-                quickSortAlgo(vector, low, pi - 1, m_rend);
+            int pivot = partition(vector, low, high,m_rend);
+
+            if(!done){
+
+                quickSortAlgo(vector, low, pivot -1,m_rend);
             }
-            if (!done)
-            {
-                quickSortAlgo(vector, pi + 1, high, m_rend);
+            if(!done){
+
+                quickSortAlgo(vector, pivot +1, high,m_rend);
             }
         }
     }

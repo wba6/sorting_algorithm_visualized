@@ -44,7 +44,7 @@ namespace algo
     {
         for (size_t i = 0; i < interations; i++)
         {
-            for (size_t j{i + 1}; j < 52; j++)
+            for (size_t j{i + 1}; j < vector.size(); j++)
             {
                 if (ObjectRender::visualize(vector, j, i, m_rend))
                 {
@@ -54,18 +54,10 @@ namespace algo
                 SDL_Delay(100-sort_speed);
                 if ((-1 * vector.at(i)->getDestRect().h) < (-1 * vector.at(j)->getDestRect().h))
                 {
-                    int temp = vector.at(i)->getDestRect().x;
-                    vector.at(i)->getDestRect().x = vector.at(j)->getDestRect().x;
-                    vector.at(j)->getDestRect().x = temp;
+                    std::swap(vector.at(j)->getDestRect().x,vector.at(i)->getDestRect().x);
                     iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
                 }
             }
-        }
-
-
-        for (size_t i{0}; i < vector.size(); i++)
-        {
-            std::cout << "sorted numbers :" << vector.at(i)->getDestRect().x / 15 << " at " << vector.at(i)->getDestRect().h << std::endl;
         }
     }
     void insertionSort::OnImGuiRender()
