@@ -8,7 +8,7 @@
 namespace algo
 {
     insertionSort::insertionSort()
-        : rectLimit(52), sort_speed(0), done(false)
+        : rectLimit(52), sort_speed(50), done(false)
     {
         generateRandNum();
     }
@@ -51,7 +51,7 @@ namespace algo
                     done = true;
                     return;
                 }
-                SDL_Delay(50);
+                SDL_Delay(100-sort_speed);
                 if ((-1 * vector.at(i)->getDestRect().h) < (-1 * vector.at(j)->getDestRect().h))
                 {
                     int temp = vector.at(i)->getDestRect().x;
@@ -71,6 +71,7 @@ namespace algo
     void insertionSort::OnImGuiRender()
     {
         ImGui::Text("Insertion sort algorithm");
+        ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     }
     void insertionSort::Reset()

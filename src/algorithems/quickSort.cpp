@@ -9,7 +9,7 @@
 namespace algo
 {
     quickSort::quickSort()
-        : rectLimit(52), sort_speed(0), done(false)
+        : rectLimit(52), sort_speed(50), done(false)
     {
         generateRandNum();
     }
@@ -62,7 +62,7 @@ namespace algo
                 done = true;
                 break;
             }
-            SDL_Delay(50);
+            SDL_Delay(sort_speed);
             if ((-1 * vector.at(j)->getDestRect().h) > pivot)
             {
                 i++;// increment index of smaller element
@@ -99,6 +99,7 @@ namespace algo
     void quickSort::OnImGuiRender()
     {
         ImGui::Text("Quick sort algorithm");
+        ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
     }
     void quickSort::Reset()
