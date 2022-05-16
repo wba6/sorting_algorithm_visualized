@@ -5,7 +5,6 @@
 #ifndef SORTING_ALGORITHM_VISUALIZED_QUICKSORT_H
 #define SORTING_ALGORITHM_VISUALIZED_QUICKSORT_H
 #include "../rectangle.h"
-#include "../sortingAlgorimths.h"
 #include "SDL.h"
 #include "algorithms.h"
 #include <vector>

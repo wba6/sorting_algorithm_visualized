@@ -1,9 +1,7 @@
 
 #include "insertionSort.h"
 #include "../ObjectRender.h"
-#include "../sortingAlgorimths.h"
 #include "imgui/imgui.h"
-#include <iostream>
 #include <random>
 namespace algo
 {
@@ -46,7 +44,7 @@ namespace algo
         {
             for (size_t j{i + 1}; j < vector.size(); j++)
             {
-                if (ObjectRender::visualize(vector, j, i, m_rend))
+                if (ObjectRender::visualize(vector, j, i, -1, m_rend))
                 {
                     done = true;
                     return;

@@ -4,7 +4,6 @@
 #define SORTING_ALGORITHM_VISUALIZED_INSERTIONSORT_H
 
 #include "../rectangle.h"
-#include "../sortingAlgorimths.h"
 #include "SDL.h"
 #include "algorithms.h"
 #include <vector>
