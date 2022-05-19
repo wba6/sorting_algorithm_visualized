@@ -54,7 +54,6 @@ namespace algo
 
         for (int j = low; j <= high- 1; j++)
         {
-            std::cout << "pivot: " << pivot << std::endl;
             //render objects and check if the user has stopped the algorithm
             if (ObjectRender::visualize(vector, j, i,high, m_rend))
             {
@@ -101,9 +100,11 @@ namespace algo
         ImGui::Text("Quick sort algorithm");
         ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        if(ImGui::Button("Reset")){
-            generateRandNum();
-            done = false;
+        if(done){
+            if(ImGui::Button("Reset")){
+                generateRandNum();
+                done = false;
+            }
         }
     }
     void quickSort::Reset()
@@ -123,7 +124,6 @@ namespace algo
         for (size_t i{rectLimit}; i > 0; i--)
         {
             int randNum = distribution(generator);
-            //TODO: check for mem leak using valgrind
             auto rect = new rectangle(randNum, (int) i);
             rectangleVec.push_back(rect);
             rect = nullptr;

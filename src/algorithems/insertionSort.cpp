@@ -63,6 +63,12 @@ namespace algo
         ImGui::Text("Insertion sort algorithm");
         ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
+        if(done){
+            if(ImGui::Button("Reset")){
+                generateRandNum();
+                done = false;
+            }
+        }
     }
     void insertionSort::Reset()
     {
