@@ -45,35 +45,8 @@ namespace algo
     void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
         quickSortAlgo(vector, 0, (int)vector.size() -1, m_rend);
-        //quickSortTest(vector, 0, (int)vector.size() -1, m_rend);
         done = true;
     }
-//    void quickSort::quickSortTest( std::vector<rectangle *> &vector,int first,int last, SDL_Renderer *&m_rend){
-//        int pivot,i,j;
-//
-//        if(first < last){
-//            pivot = first;
-//            i = first;
-//            j = last;
-//
-//            while(i < j){
-//                while(vector[i]->getDestRect().h <= vector[pivot]->getDestRect().h && i < last)
-//                    i++;
-//                while(j>first && vector[pivot])
-//                    j--;
-//                if(i < j){
-//                    ObjectRender::visualize(vector, j, i,pivot, m_rend);
-//                    std::swap(vector.at(j)->getDestRect().x,vector.at(i)->getDestRect().x);
-//                    std::iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
-//                }
-//            }
-//
-//            std::swap(vector.at(j)->getDestRect().x,vector.at(pivot)->getDestRect().x);
-//            std::iter_swap(vector.begin() + (int) pivot, vector.begin() + (int) j);
-//            quickSortTest(vector,first,j-1,m_rend);
-//            quickSortTest(vector,j+1,last,m_rend);
-//        }
-//    }
     int quickSort::partition(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)
     {
         int pivot = -1*vector.at(high)->getDestRect().h;    // pivot

@@ -23,7 +23,6 @@ namespace algo
         void beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend);
         int partition(std::vector<rectangle *> &vector, int start, int end, SDL_Renderer *&m_rend);
         void quickSortAlgo(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend);
-        void quickSortTest( std::vector<rectangle *> &vector,int first,int last, SDL_Renderer *&m_rend);
         ~quickSort() override;
 
     private:
