@@ -55,9 +55,7 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
     {
         m_isRunning = false;
     }
-    //setting up imgui
     // Setup Dear ImGui context
-
     ObjectRender::initImgui(renderer, m_window);
     EventHandler::initEvents(this);
 }
@@ -72,15 +70,11 @@ void renderWindow::update()
 {
 }
 
-//TODO:Remove this
-bool show_demo_window = true;
 void renderWindow::render()
 {
 
     ObjectRender::completeRender(renderer);
-    //ObjectRender::catchFrameVisualize(renderer);
-    //ObjectRender::releaseFrameVisualize(renderer);
-    // Update and Render additional Platform Windows
+
 }
 
 bool renderWindow::running() { return m_isRunning; }
