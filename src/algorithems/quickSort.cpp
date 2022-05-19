@@ -62,7 +62,7 @@ namespace algo
                 break;
             }
             //controls speed of sort
-            SDL_Delay(1000-sort_speed);
+            SDL_Delay(100-sort_speed);
             // If current element is smaller than the pivot
             if ((-1*vector.at(j)->getDestRect().h) >= pivot)
             {
@@ -72,7 +72,7 @@ namespace algo
             }
         }
         if(!done){
-
+            std::swap(vector.at(i+1)->getDestRect().x,vector.at(high)->getDestRect().x);
             iter_swap(vector.begin() + (int) i+1, vector.begin() + (int) high);
         }
         return (i + 1);
@@ -99,7 +99,7 @@ namespace algo
     void quickSort::OnImGuiRender()
     {
         ImGui::Text("Quick sort algorithm");
-        ImGui::SliderInt("Speed", &sort_speed, 0, 1000);
+        ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         if(ImGui::Button("Reset")){
             generateRandNum();
