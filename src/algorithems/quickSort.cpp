@@ -6,6 +6,7 @@
 #include "../ObjectRender.h"
 #include "imgui/imgui.h"
 #include <random>
+#include <chrono>
 namespace algo
 {
     quickSort::quickSort()
@@ -119,7 +120,8 @@ namespace algo
     void quickSort::generateRandNum()
     {
         Reset();
-        std::default_random_engine generator;
+        unsigned int seed = std::chrono::steady_clock::now().time_since_epoch().count();
+        std::default_random_engine generator(seed);
         std::uniform_int_distribution<int> distribution(20, 500);
         for (size_t i{rectLimit}; i > 0; i--)
         {
