@@ -59,7 +59,7 @@ public:
         SDL_RenderPresent(renderer);
     }
 
-    static bool visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex,int pivotIndex, SDL_Renderer *&renderer)
+    static bool visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex, int pivotIndex, SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
 
@@ -74,7 +74,8 @@ public:
             {
                 SDL_SetRenderDrawColor(renderer, 0, 255, 0, 255);
             }
-            else if(pivotIndex == i){
+            else if (pivotIndex == i)
+            {
                 SDL_SetRenderDrawColor(renderer, 0, 0, 255, 255);
             }
             else

@@ -2,8 +2,8 @@
 #include "insertionSort.h"
 #include "../ObjectRender.h"
 #include "imgui/imgui.h"
-#include <random>
 #include <chrono>
+#include <random>
 namespace algo
 {
     insertionSort::insertionSort()
@@ -50,10 +50,10 @@ namespace algo
                     done = true;
                     return;
                 }
-                SDL_Delay(100-sort_speed);
+                SDL_Delay(100 - sort_speed);
                 if ((-1 * vector.at(i)->getDestRect().h) < (-1 * vector.at(j)->getDestRect().h))
                 {
-                    std::swap(vector.at(j)->getDestRect().x,vector.at(i)->getDestRect().x);
+                    std::swap(vector.at(j)->getDestRect().x, vector.at(i)->getDestRect().x);
                     iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
                 }
             }
@@ -64,8 +64,10 @@ namespace algo
         ImGui::Text("Insertion sort algorithm");
         ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        if(done){
-            if(ImGui::Button("Reset")){
+        if (done)
+        {
+            if (ImGui::Button("Reset"))
+            {
                 generateRandNum();
                 done = false;
             }

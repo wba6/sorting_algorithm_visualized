@@ -5,8 +5,8 @@
 #include "quickSort.h"
 #include "../ObjectRender.h"
 #include "imgui/imgui.h"
-#include <random>
 #include <chrono>
+#include <random>
 namespace algo
 {
     quickSort::quickSort()
@@ -45,35 +45,36 @@ namespace algo
     }
     void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
-        quickSortAlgo(vector, 0, (int)vector.size() -1, m_rend);
+        quickSortAlgo(vector, 0, (int) vector.size() - 1, m_rend);
         done = true;
     }
     int quickSort::partition(std::vector<rectangle *> &vector, int low, int high, SDL_Renderer *&m_rend)
     {
-        int pivot = -1*vector.at(high)->getDestRect().h;    // pivot
+        int pivot = -1 * vector.at(high)->getDestRect().h;// pivot
         int i = (low - 1);
 
-        for (int j = low; j <= high- 1; j++)
+        for (int j = low; j <= high - 1; j++)
         {
             //render objects and check if the user has stopped the algorithm
-            if (ObjectRender::visualize(vector, j, i,high, m_rend))
+            if (ObjectRender::visualize(vector, j, i, high, m_rend))
             {
                 done = true;
                 break;
             }
             //controls speed of sort
-            SDL_Delay(100-sort_speed);
+            SDL_Delay(100 - sort_speed);
             // If current element is smaller than the pivot
-            if ((-1*vector.at(j)->getDestRect().h) >= pivot)
+            if ((-1 * vector.at(j)->getDestRect().h) >= pivot)
             {
                 i++;
-                std::swap(vector.at(j)->getDestRect().x,vector.at(i)->getDestRect().x);
+                std::swap(vector.at(j)->getDestRect().x, vector.at(i)->getDestRect().x);
                 std::iter_swap(vector.begin() + (int) i, vector.begin() + (int) j);
             }
         }
-        if(!done){
-            std::swap(vector.at(i+1)->getDestRect().x,vector.at(high)->getDestRect().x);
-            iter_swap(vector.begin() + (int) i+1, vector.begin() + (int) high);
+        if (!done)
+        {
+            std::swap(vector.at(i + 1)->getDestRect().x, vector.at(high)->getDestRect().x);
+            iter_swap(vector.begin() + (int) i + 1, vector.begin() + (int) high);
         }
         return (i + 1);
     }
@@ -83,15 +84,17 @@ namespace algo
         if (low < high)
         {
 
-            int pivot = partition(vector, low, high,m_rend);
+            int pivot = partition(vector, low, high, m_rend);
 
-            if(!done){
+            if (!done)
+            {
 
-                quickSortAlgo(vector, low, pivot -1,m_rend);
+                quickSortAlgo(vector, low, pivot - 1, m_rend);
             }
-            if(!done){
+            if (!done)
+            {
 
-                quickSortAlgo(vector, pivot +1, high,m_rend);
+                quickSortAlgo(vector, pivot + 1, high, m_rend);
             }
         }
     }
@@ -101,8 +104,10 @@ namespace algo
         ImGui::Text("Quick sort algorithm");
         ImGui::SliderInt("Speed", &sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
-        if(done){
-            if(ImGui::Button("Reset")){
+        if (done)
+        {
+            if (ImGui::Button("Reset"))
+            {
                 generateRandNum();
                 done = false;
             }

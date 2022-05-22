@@ -74,7 +74,6 @@ void renderWindow::render()
 {
 
     ObjectRender::completeRender(renderer);
-
 }
 
 bool renderWindow::running() { return m_isRunning; }
