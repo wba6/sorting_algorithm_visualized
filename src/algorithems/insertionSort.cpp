@@ -91,7 +91,6 @@ namespace algo
         for (size_t i{rectLimit}; i > 0; i--)
         {
             int randNum = distribution(generator);
-            //TODO: check for mem leak using valgrind
             auto rect = new rectangle(randNum, (int) i);
             rectangleVec.push_back(rect);
             rect = nullptr;
