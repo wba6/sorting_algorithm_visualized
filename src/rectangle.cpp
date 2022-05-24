@@ -1,7 +1,7 @@
 
 #include "rectangle.h"
 #include "renderWindow.h"
-rectangle::rectangle(const int hieght, int interation)
+rectangle::rectangle(int height, int iteration)
     : width(10)
 {
     /*
@@ -10,8 +10,8 @@ rectangle::rectangle(const int hieght, int interation)
      * */
 
     destRect.w = width;
-    destRect.h = (-1 * hieght);
-    destRect.x = interation * 15;
+    destRect.h = (-1 * height);
+    destRect.x = iteration * 15;
     destRect.y = 0 + (int) renderWindow::s_windowHeight;
 }
 

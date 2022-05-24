@@ -16,6 +16,13 @@
 #include <vector>
 class ObjectRender {
 public:
+    /*
+     * instantiates imgui, sets theme, and sets default menu and algorithm types
+     *
+     * takes in SDL_Renderer pointer reference and  SDL_Window pointer reference
+     *
+     * Parameters: SDL_Renderer *&renderer, SDL_Window *&window
+     * */
     static void initImgui(SDL_Renderer *&renderer, SDL_Window *&window)
     {
 
@@ -33,12 +40,25 @@ public:
         s_algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
         s_algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
     }
+
+    /*
+     * terminates Imgui should be done when finished with program
+     * */
     static void shutDownImgui()
     {
         ImGui_ImplSDLRenderer_Shutdown();
         ImGui_ImplSDL2_Shutdown();
         ImGui::DestroyContext();
     }
+
+    /*
+     * catches the frame from which an algorithm was called
+     * needs to be done once before calling visualize
+     *
+     * takes in a pointer reference to current renderer instance
+     *
+     * Parameters: SDL_Render*& renderer
+     */
     static void catchFrameVisualize(SDL_Renderer *&renderer)
     {
 
@@ -59,6 +79,17 @@ public:
         SDL_RenderPresent(renderer);
     }
 
+    /*
+     * visualize function used to show the algorithms sorting each frame
+     * called from within an algorithm at each iteration
+     *
+     * takes in a vector of pointers to rects objects, a compare index that will be red, the swapIndex witch is green,
+     * and pivot index only used in some algorithms witch is blue.
+     *
+     * all other rects will be drawn white
+     *
+     * Parameters:  std::vector<rectangle *> &rects, int compareIndex, int swapIndex, int pivotIndex, SDL_Renderer *&renderer
+     * */
     static bool visualize(std::vector<rectangle *> &rects, int compareIndex, int swapIndex, int pivotIndex, SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
@@ -100,6 +131,15 @@ public:
             return false;
         }
     }
+
+    /*
+     * returns to the frame from which an algorithm was called
+     * needs to be done once done sorting and returning to complete render
+     *
+     * takes in a pointer reference to current renderer instance
+     *
+     * Parameters: SDL_Render*& renderer
+     */
     static void releaseFrameVisualize(SDL_Renderer *&renderer)
     {
         SDL_RenderClear(renderer);
@@ -110,22 +150,33 @@ public:
         ImGui::NewFrame();
     }
 
+    /*
+     * complete render of a frame
+     * Will mainly occur on main menu
+     *
+     * takes in a pointer reference to current renderer instance
+     *
+     * Parameters: SDL_Render*& renderer
+     * */
     static void completeRender(SDL_Renderer *&renderer)
     {
-
-        // Imgui render
         SDL_RenderClear(renderer);
 
-
-        // Update and Render additional Platform Windows
         ObjectRender::imguiRender(renderer, false);
         SDL_SetRenderDrawColor(renderer, 0, 0, 0, 255);
-        //sdl renderer
 
         ImGui_ImplSDLRenderer_RenderDrawData(ImGui::GetDrawData());
         SDL_RenderPresent(renderer);
     }
 
+    /*
+     * Renders imgui and calls for current instance of the algoithm to render if not already
+     *
+     * takes in a pointer reference to current renderer instance and
+     * a bool to check if the function is being called from within a algorithm already
+     *
+     * Parameters: SDL_Renderer *& renderer , bool inbeaded
+     * */
     static void imguiRender(SDL_Renderer *&renderer, bool inBeaded)
     {
         ImGui_ImplSDLRenderer_NewFrame();
@@ -152,10 +203,12 @@ public:
         ImGui::Render();
     }
 
-private:
+    //disallow construction and destruction of class
     ObjectRender() = delete;
     ~ObjectRender() = delete;
-    static algo::algorithms *s_currentAlgo;
-    static algo::algorithms_menu *s_algoMenu;
+
+private:
+    static algo::algorithms *s_currentAlgo;  //keeps track of selected algorithm, default is algorithms_menu
+    static algo::algorithms_menu *s_algoMenu;//pointer to the starting menu
 };
 #endif//SORTING_ALGORITHM_VISUALIZED_OBJECTRENDER_H

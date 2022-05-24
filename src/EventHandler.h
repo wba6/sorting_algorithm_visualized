@@ -19,11 +19,13 @@ public:
     }
     static void HandleEvents()
     {
-        // gets events
+        //clear previous events
         events.clear();
+        //get new events
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
         {
+            //imgui events
             ImGui_ImplSDL2_ProcessEvent(&event);
             switch (event.type)
             {

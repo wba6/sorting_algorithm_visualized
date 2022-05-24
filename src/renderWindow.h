@@ -17,15 +17,11 @@ public:
     void init(const char *title, int xpos, int ypos, int width, int height,
               bool fullscreen);
 
-    void handleEvents();
-
-    void update();
+    static void handleEvents();
 
     void render();
 
-    bool running();
-
-    void restart();
+    bool running() const;
 
 
     SDL_Window *getWindow() const;

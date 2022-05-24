@@ -5,7 +5,7 @@
 #include "SDL.h"
 class rectangle {
 public:
-    rectangle(const int hieght, int interation);
+    rectangle(int height, int iteration);
     SDL_Rect &getDestRect() { return destRect; };
 
 
@@ -13,7 +13,7 @@ public:
 
 private:
     int width;
-    SDL_Rect destRect;
+    SDL_Rect destRect{};
 };
 
 #endif// SORTING_ALGORITHM_VISUALIZED_RECTANGLE_H

@@ -66,17 +66,12 @@ void renderWindow::handleEvents()
     EventHandler::HandleEvents();
 }
 
-void renderWindow::update()
-{
-}
-
 void renderWindow::render()
 {
-
     ObjectRender::completeRender(renderer);
 }
 
-bool renderWindow::running() { return m_isRunning; }
+bool renderWindow::running() const { return m_isRunning; }
 
 SDL_Window *renderWindow::getWindow() const
 {
@@ -84,11 +79,4 @@ SDL_Window *renderWindow::getWindow() const
 }
 
 
-void renderWindow::restart()
-{
-    int numKeys;
-    const Uint8 *keys = SDL_GetKeyboardState(&numKeys);
-    if (keys[SDL_SCANCODE_R])
-    {
-    }
-}
+
