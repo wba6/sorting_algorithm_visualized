@@ -33,15 +33,14 @@ namespace algo
         {
             SDL_RenderFillRect(m_rend, &rectangleVec.at(i)->getDestRect());
         }
-
-        ObjectRender::catchFrameVisualize(m_rend);
-
         if (!done)
         {
-            beginSort(rectangleVec, 51, m_rend);
-        }
+            ObjectRender::catchFrameVisualize(m_rend);
 
-        ObjectRender::releaseFrameVisualize(m_rend);
+            beginSort(rectangleVec, 51, m_rend);
+
+            ObjectRender::releaseFrameVisualize(m_rend);
+        }
     }
     void quickSort::beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend)
     {
