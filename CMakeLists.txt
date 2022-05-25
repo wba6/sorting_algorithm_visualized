@@ -28,7 +28,7 @@ endif ()
 
 add_executable(sorting_algorithm_visualized  src/main.cpp src/renderWindow.cpp src/renderWindow.h src/algorithems/insertionSort.cpp
         src/algorithems/insertionSort.h src/rectangle.cpp src/rectangle.h
-        src/algorithems/algorithms.cpp src/algorithems/algorithms.h src/algorithems/quickSort.cpp src/algorithems/quickSort.h src/ObjectRender.h src/ObjectRender.cpp src/EventHandler.h src/EventHandler.cpp)
+        src/algorithems/algorithms.cpp src/algorithems/algorithms.h src/algorithems/quickSort.cpp src/algorithems/quickSort.h src/ObjectRender.h src/ObjectRender.cpp src/EventHandler.h src/EventHandler.cpp src/randomNumGen.h src/randomNumGen.cpp)
 
 target_link_libraries(${PROJECT_NAME}
         SDL2main

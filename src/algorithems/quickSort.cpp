@@ -5,8 +5,8 @@
 #include "quickSort.h"
 #include "../ObjectRender.h"
 #include "imgui/imgui.h"
-#include <chrono>
-#include <random>
+#include "../randomNumGen.h"
+
 namespace algo
 {
     quickSort::quickSort()
@@ -124,12 +124,10 @@ namespace algo
     void quickSort::generateRandNum()
     {
         Reset();
-        unsigned int seed = std::chrono::steady_clock::now().time_since_epoch().count();
-        std::default_random_engine generator(seed);
-        std::uniform_int_distribution<int> distribution(20, 500);
+        randomNumGen numGen;
         for (size_t i{rectLimit}; i > 0; i--)
         {
-            int randNum = distribution(generator);
+            int randNum {numGen.getRandomInt(20, 500)};
             auto rect = new rectangle(randNum, (int) i);
             rectangleVec.push_back(rect);
             rect = nullptr;

@@ -1774,10 +1774,10 @@ ImGuiID ImHashData(const void* data_p, size_t data_size, ImU32 seed)
     return ~crc;
 }
 
-// Zero-terminated string hash, with support for ### to reset back to seed value
+// Zero-terminated string hash, with support for ### to reset back to m_seed value
 // We support a syntax of "label###id" where only "###id" is included in the hash, and only "label" gets displayed.
 // Because this syntax is rarely used we are optimizing for the common case.
-// - If we reach ### in the string we discard the hash so far and reset to the seed.
+// - If we reach ### in the string we discard the hash so far and reset to the m_seed.
 // - We don't do 'current += 2; continue;' after handling ### to keep the code smaller/faster (measured ~10% diff in Debug build)
 // FIXME-OPT: Replace with e.g. FNV1a hash? CRC32 pretty much randomly access 1KB. Need to do proper measurements.
 ImGuiID ImHashStr(const char* data_p, size_t data_size, ImU32 seed)
@@ -8012,7 +8012,7 @@ void ImGui::PushID(int int_id)
     window->IDStack.push_back(id);
 }
 
-// Push a given id value ignoring the ID stack as a seed.
+// Push a given id value ignoring the ID stack as a m_seed.
 void ImGui::PushOverrideID(ImGuiID id)
 {
     ImGuiContext& g = *GImGui;
