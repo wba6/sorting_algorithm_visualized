@@ -1,8 +1,8 @@
 
 #include "insertionSort.h"
 #include "../ObjectRender.h"
-#include "imgui/imgui.h"
 #include "../randomNumGen.h"
+#include "imgui/imgui.h"
 
 namespace algo
 {
@@ -29,7 +29,7 @@ namespace algo
         {
             SDL_RenderFillRect(m_rend, &rectangleVec.at(i)->getDestRect());
         }
-        if(!done)
+        if (!done)
         {
             ObjectRender::catchFrameVisualize(m_rend);
 
@@ -91,7 +91,7 @@ namespace algo
         randomNumGen numGen;
         for (size_t i{rectLimit}; i > 0; i--)
         {
-            int randNum {numGen.getRandomInt(20,500)};
+            int randNum{numGen.getRandomInt(20, 500)};
             auto rect = new rectangle(randNum, (int) i);
             rectangleVec.push_back(rect);
             rect = nullptr;

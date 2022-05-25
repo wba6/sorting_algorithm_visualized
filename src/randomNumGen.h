@@ -10,6 +10,7 @@ public:
     explicit randomNumGen();
 
     int getRandomInt(int min, int max);
+
 private:
     void setMinMax(int min, int max);
     unsigned m_seed;

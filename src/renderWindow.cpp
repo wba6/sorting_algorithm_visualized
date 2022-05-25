@@ -77,6 +77,3 @@ SDL_Window *renderWindow::getWindow() const
 {
     return m_window;
 }
-
-
-

@@ -6,14 +6,14 @@
 #include <chrono>
 #include <random>
 randomNumGen::randomNumGen()
-: m_seed(std::chrono::steady_clock::now().time_since_epoch().count()), m_generator(m_seed)
+    : m_seed(std::chrono::steady_clock::now().time_since_epoch().count()), m_generator(m_seed)
 {
-
 }
 
 int randomNumGen::getRandomInt(int min, int max)
 {
-    if(min >= max){
+    if (min >= max)
+    {
         return min;
     }
 
@@ -23,4 +23,3 @@ int randomNumGen::getRandomInt(int min, int max)
 
     return distribution(m_generator);
 }
-
