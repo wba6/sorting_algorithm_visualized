@@ -42,7 +42,7 @@ public:
     }
 
     /*
-     * terminates Imgui should be done when finished with program
+     * terminates Imgui should be m_done when finished with program
      * */
     static void shutDownImgui()
     {
@@ -53,9 +53,9 @@ public:
 
     /*
      * catches the frame from which an algorithm was called
-     * needs to be done once before calling visualize
+     * needs to be m_done once before calling visualize
      *
-     * takes in a pointer reference to current renderer instance
+     * takes in a pointer reference to current renderer s_instance
      *
      * Parameters: SDL_Render*& renderer
      */
@@ -134,9 +134,9 @@ public:
 
     /*
      * returns to the frame from which an algorithm was called
-     * needs to be done once done sorting and returning to complete render
+     * needs to be m_done once m_done sorting and returning to complete render
      *
-     * takes in a pointer reference to current renderer instance
+     * takes in a pointer reference to current renderer s_instance
      *
      * Parameters: SDL_Render*& renderer
      */
@@ -154,7 +154,7 @@ public:
      * complete render of a frame
      * Will mainly occur on main menu
      *
-     * takes in a pointer reference to current renderer instance
+     * takes in a pointer reference to current renderer s_instance
      *
      * Parameters: SDL_Render*& renderer
      * */
@@ -170,9 +170,9 @@ public:
     }
 
     /*
-     * Renders imgui and calls for current instance of the algoithm to render if not already
+     * Renders imgui and calls for current s_instance of the algoithm to render if not already
      *
-     * takes in a pointer reference to current renderer instance and
+     * takes in a pointer reference to current renderer s_instance and
      * a bool to check if the function is being called from within a algorithm already
      *
      * Parameters: SDL_Renderer *& renderer , bool inbeaded

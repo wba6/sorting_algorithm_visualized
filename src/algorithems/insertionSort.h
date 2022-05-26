@@ -17,15 +17,15 @@ namespace algo
         void OnImGuiRender() override;
         void Reset();
         void generateRandNum() override;
-        void beginSort(std::vector<rectangle *> &vector, size_t interations, SDL_Renderer *&m_rend);
+        void beginSort(std::vector<rectangle *> &vector, size_t iterations, SDL_Renderer *&m_rend);
 
         ~insertionSort() override;
 
     private:
-        int sort_speed;
-        std::vector<rectangle *> rectangleVec;
-        size_t rectLimit;
-        bool done;
+        int m_sort_speed;
+        std::vector<rectangle *> m_rectangleVec;
+        size_t m_rectLimit;
+        bool m_done;
     };
 }//namespace algo
 

@@ -593,7 +593,7 @@ typedef struct stbrp_rect stbrp_rect;
 STBTT_DEF int  stbtt_PackBegin(stbtt_pack_context *spc, unsigned char *pixels, int width, int height, int stride_in_bytes, int padding, void *alloc_context);
 // Initializes a packing context stored in the passed-in stbtt_pack_context.
 // Future calls using this context will pack characters into the bitmap passed
-// in here: a 1-channel bitmap that is width * height. stride_in_bytes is
+// in here: a 1-channel bitmap that is m_width * height. stride_in_bytes is
 // the distance from one row to the next (or 0 to mean they are packed tightly
 // together). "padding" is the amount of padding to leave between each
 // character (normally you want '1' for bitmaps you'll use as textures with
@@ -880,7 +880,7 @@ STBTT_DEF unsigned char *stbtt_GetCodepointBitmap(const stbtt_fontinfo *info, fl
 // allocates a large-enough single-channel 8bpp bitmap and renders the
 // specified character/glyph at the specified scale into it, with
 // antialiasing. 0 is no coverage (transparent), 255 is fully covered (opaque).
-// *width & *height are filled out with the width & height of the bitmap,
+// *m_width & *height are filled out with the m_width & height of the bitmap,
 // which is stored left-to-right, top-to-bottom.
 //
 // xoff/yoff are the offset it pixel space from the glyph origin to the top-left of the bitmap
@@ -893,7 +893,7 @@ STBTT_DEF void stbtt_MakeCodepointBitmap(const stbtt_fontinfo *info, unsigned ch
 // the same as stbtt_GetCodepointBitmap, but you pass in storage for the bitmap
 // in the form of 'output', with row spacing of 'out_stride' bytes. the bitmap
 // is clipped to out_w/out_h bytes. Call stbtt_GetCodepointBitmapBox to get the
-// width and height and positioning info for it first.
+// m_width and height and positioning info for it first.
 
 STBTT_DEF void stbtt_MakeCodepointBitmapSubpixel(const stbtt_fontinfo *info, unsigned char *output, int out_w, int out_h, int out_stride, float scale_x, float scale_y, float shift_x, float shift_y, int codepoint);
 // same as stbtt_MakeCodepointBitmap, but you can specify a subpixel
@@ -905,7 +905,7 @@ STBTT_DEF void stbtt_MakeCodepointBitmapSubpixelPrefilter(const stbtt_fontinfo *
 
 STBTT_DEF void stbtt_GetCodepointBitmapBox(const stbtt_fontinfo *font, int codepoint, float scale_x, float scale_y, int *ix0, int *iy0, int *ix1, int *iy1);
 // get the bbox of the bitmap centered around the glyph origin; so the
-// bitmap width is ix1-ix0, height is iy1-iy0, and location to place
+// bitmap m_width is ix1-ix0, height is iy1-iy0, and location to place
 // the bitmap top left is (leftSideBearing*scale,iy0).
 // (Note that the bitmap uses y-increases-down, but the shape uses
 // y-increases-up, so CodepointBitmapBox and CodepointBox are inverted.)
@@ -963,9 +963,9 @@ STBTT_DEF unsigned char * stbtt_GetCodepointSDF(const stbtt_fontinfo *info, floa
 //        onedge_value      --  value 0-255 to test the SDF against to reconstruct the character (i.e. the isocontour of the character)
 //        pixel_dist_scale  --  what value the SDF should increase by when moving one SDF "pixel" away from the edge (on the 0..255 scale)
 //                                 if positive, > onedge_value is inside; if negative, < onedge_value is inside
-//        width,height      --  output height & width of the SDF bitmap (including padding)
+//        m_width,height      --  output height & m_width of the SDF bitmap (including padding)
 //        xoff,yoff         --  output origin of the character
-//        return value      --  a 2D array of bytes 0..255, width*height in size
+//        return value      --  a 2D array of bytes 0..255, m_width*height in size
 //
 // pixel_dist_scale & onedge_value are a scale & bias that allows you to make
 // optimal use of the limited 0..255 for your application, trading off precision
@@ -2022,7 +2022,7 @@ static int stbtt__run_charstring(const stbtt_fontinfo *info, int glyph_index, st
 
 #define STBTT__CSERR(s) (0)
 
-   // this currently ignores the initial width value, which isn't needed if we have hmtx
+   // this currently ignores the initial m_width value, which isn't needed if we have hmtx
    b = stbtt__cff_index_get(info->charstrings, glyph_index);
    while (b.cursor < b.size) {
       i = 0;
@@ -3218,7 +3218,7 @@ static void stbtt__fill_active_edges_new(float *scanline, float *scanline_fill, 
                // rectangle 1 wide times the height change in the second pixel, which is dy.
 
                step = sign * dy * 1; // dy is dy/dx, change in y for every 1 change in x,
-               // which multiplied by 1-pixel-width is how much pixel area changes for each step in x
+               // which multiplied by 1-pixel-m_width is how much pixel area changes for each step in x
                // so the area advances by 'step' every time
 
                for (x = x1+1; x < x2; ++x) {
@@ -3907,7 +3907,7 @@ typedef int stbrp_coord;
 
 typedef struct
 {
-   int width,height;
+   int m_width,height;
    int x,y,bottom_y;
 } stbrp_context;
 
@@ -3924,7 +3924,7 @@ struct stbrp_rect
 
 static void stbrp_init_target(stbrp_context *con, int pw, int ph, stbrp_node *nodes, int num_nodes)
 {
-   con->width  = pw;
+   con->m_width  = pw;
    con->height = ph;
    con->x = 0;
    con->y = 0;
@@ -3937,7 +3937,7 @@ static void stbrp_pack_rects(stbrp_context *con, stbrp_rect *rects, int num_rect
 {
    int i;
    for (i=0; i < num_rects; ++i) {
-      if (con->x + rects[i].w > con->width) {
+      if (con->x + rects[i].w > con->m_width) {
          con->x = 0;
          con->y = con->bottom_y;
       }
@@ -4146,7 +4146,7 @@ static float stbtt__oversample_shift(int oversample)
    if (!oversample)
       return 0.0f;
 
-   // The prefilter is a box filter of width "oversample",
+   // The prefilter is a box filter of m_width "oversample",
    // which shifts phase by (oversample - 1)/2 pixels in
    // oversampled space. We want to shift in the opposite
    // direction to counter this.

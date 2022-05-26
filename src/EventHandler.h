@@ -15,32 +15,32 @@ class EventHandler {
 public:
     static void initEvents(renderWindow *window)
     {
-        instance = window;
+        s_instance = window;
     }
     static void HandleEvents()
     {
-        //clear previous events
-        events.clear();
-        //get new events
+        //clear previous s_events
+        s_events.clear();
+        //get new s_events
         SDL_Event event;
         while (SDL_PollEvent(&event) != 0)
         {
-            //imgui events
+            //imgui s_events
             ImGui_ImplSDL2_ProcessEvent(&event);
             switch (event.type)
             {
                 case SDL_QUIT:
-                    instance->m_isRunning = false;
+                    s_instance->m_isRunning = false;
                     break;
             }
-            events.push_back(event);
+            s_events.push_back(event);
         }
     }
 
 private:
-    static renderWindow *instance;
-    static std::vector<SDL_Event> events;
+    static renderWindow *s_instance;
+    static std::vector<SDL_Event> s_events;
 
-    EventHandler();
+    EventHandler() = delete;
 };
 #endif//SORTING_ALGORITHM_VISUALIZED_EVENTHANDLER_H

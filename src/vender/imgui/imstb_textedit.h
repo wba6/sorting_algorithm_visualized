@@ -183,13 +183,13 @@
 // then test for their presence in e.g. STB_TEXTEDIT_K_WORDLEFT. For example,
 // my Windows implementations add an additional CONTROL bit, and an additional KEYDOWN
 // bit. Then all of the STB_TEXTEDIT_K_ values bitwise-or in the KEYDOWN bit,
-// and I pass both WM_KEYDOWN and WM_CHAR events to the "key" function in the
-// API below. The control keys will only match WM_KEYDOWN events because of the
+// and I pass both WM_KEYDOWN and WM_CHAR s_events to the "key" function in the
+// API below. The control keys will only match WM_KEYDOWN s_events because of the
 // keydown bit I add, and STB_TEXTEDIT_KEYTOTEXT only tests for the KEYDOWN
-// bit so it only decodes WM_CHAR events.
+// bit so it only decodes WM_CHAR s_events.
 //
 // STB_TEXTEDIT_LAYOUTROW returns information about the shape of one displayed
-// row of characters assuming they start on the i'th character--the width and
+// row of characters assuming they start on the i'th character--the m_width and
 // the height and the number of characters consumed. This allows this library
 // to traverse the entire layout incrementally. You need to compute word-wrapping
 // here.
@@ -235,7 +235,7 @@
 //
 //      key:
 //          call this for keyboard inputs sent to the textfield. you can use it
-//          for "key down" events or for "translated" key events. if you need to
+//          for "key down" s_events or for "translated" key s_events. if you need to
 //          do both (as in Win32), or distinguish Unicode characters from control
 //          inputs, set a high bit to distinguish the two; then you can define the
 //          various definitions like STB_TEXTEDIT_K_LEFT have the is-key-event bit

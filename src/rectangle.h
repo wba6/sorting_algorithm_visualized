@@ -6,14 +6,14 @@
 class rectangle {
 public:
     rectangle(int height, int iteration);
-    SDL_Rect &getDestRect() { return destRect; };
+    SDL_Rect &getDestRect() { return m_rect; };
 
 
     ~rectangle();
 
 private:
-    int width;
-    SDL_Rect destRect{};
+    int m_width;
+    SDL_Rect m_rect{};
 };
 
 #endif// SORTING_ALGORITHM_VISUALIZED_RECTANGLE_H

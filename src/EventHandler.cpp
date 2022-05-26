@@ -3,5 +3,5 @@
 //
 
 #include "EventHandler.h"
-renderWindow *EventHandler::instance = nullptr;
-std::vector<SDL_Event> EventHandler::events;
+renderWindow *EventHandler::s_instance = nullptr;
+std::vector<SDL_Event> EventHandler::s_events;

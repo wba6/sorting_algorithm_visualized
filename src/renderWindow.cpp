@@ -7,7 +7,7 @@
 
 unsigned int renderWindow::s_windowWidth = 0;
 unsigned int renderWindow::s_windowHeight = 0;
-renderWindow::renderWindow() {}
+renderWindow::renderWindow():renderer(nullptr), m_isRunning(false),m_window(nullptr) {}
 
 renderWindow::~renderWindow()
 {
@@ -23,7 +23,7 @@ void renderWindow::init(const char *title, int xpos, int ypos, int width, int he
 {
     s_windowHeight = height;
     s_windowWidth = width;
-    SDL_WindowFlags window_flags = (SDL_WindowFlags) (SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
+    auto window_flags = (SDL_WindowFlags) (SDL_WINDOW_RESIZABLE | SDL_WINDOW_ALLOW_HIGHDPI);
     if (fullscreen)
     {
         window_flags = (SDL_WindowFlags) (SDL_WINDOW_FULLSCREEN_DESKTOP | SDL_WINDOW_ALLOW_HIGHDPI | SDL_WINDOW_RESIZABLE);

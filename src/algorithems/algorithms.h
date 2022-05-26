@@ -13,8 +13,8 @@ namespace algo
 
     class algorithms {
     public:
-        algorithms() {}
-        virtual ~algorithms() {}
+        algorithms() =default;
+        virtual ~algorithms() =default;
 
         virtual void OnUpdate(float deltaTime){};
         virtual void OnRender(SDL_Renderer *&rend){};
@@ -25,7 +25,7 @@ namespace algo
     class algorithms_menu : public algorithms {
     public:
         explicit algorithms_menu(algorithms *&currentAgloPointer);
-        virtual ~algorithms_menu() = default;
+        ~algorithms_menu() override = default;
 
         void OnImGuiRender() override;
         template<typename t>
