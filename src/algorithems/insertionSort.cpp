@@ -65,6 +65,9 @@ namespace algo
     {
         ImGui::Text("Insertion sort algorithm");
         ImGui::SliderInt("Speed", &m_sort_speed, 0, 100);
+        ImGui::Text("Red is the current index \nbeing compared \n \n");
+        ImGui::Text("Green is the current index \nthat red is being\n compared to \n\n");
+        ImGui::Text("If Red>green they are swapped");
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
         if (m_done)
         {
