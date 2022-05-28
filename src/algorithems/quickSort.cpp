@@ -100,6 +100,7 @@ namespace algo
 
     void quickSort::OnImGuiRender()
     {
+        //TODO: add description text
         ImGui::Text("Quick sort algorithm");
         ImGui::SliderInt("Speed", &m_sort_speed, 0, 100);
         ImGui::Text("Application average %.3f ms/frame (%.1f FPS)", 1000.0f / ImGui::GetIO().Framerate, ImGui::GetIO().Framerate);
