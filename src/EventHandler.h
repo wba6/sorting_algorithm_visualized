@@ -30,6 +30,7 @@ public:
             switch (event.type)
             {
                 case SDL_QUIT:
+                    //TODO: Close window when close button is clicked while in for loop
                     s_instance->m_isRunning = false;
                     break;
             }
