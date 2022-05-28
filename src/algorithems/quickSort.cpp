@@ -73,7 +73,7 @@ namespace algo
         if (!m_done)
         {
             std::swap(vector.at(i + 1)->getDestRect().x, vector.at(high)->getDestRect().x);
-            iter_swap(vector.begin() + (int) i + 1, vector.begin() + (int) high);
+            std::iter_swap(vector.begin() + ((int) i + 1), vector.begin() + (int) high);
         }
         return (i + 1);
     }

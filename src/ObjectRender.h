@@ -186,7 +186,6 @@ public:
         {
             if (!inBeaded)
             {
-                s_currentAlgo->OnUpdate(0.0f);
                 s_currentAlgo->OnRender(renderer);
             }
 

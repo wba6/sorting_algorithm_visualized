@@ -16,7 +16,6 @@ namespace algo
         algorithms() =default;
         virtual ~algorithms() =default;
 
-        virtual void OnUpdate(float deltaTime){};
         virtual void OnRender(SDL_Renderer *&rend){};
         virtual void generateRandNum(){};
         virtual void OnImGuiRender(){};
