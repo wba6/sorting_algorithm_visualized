@@ -7,6 +7,7 @@
 #include "EventHandler.h"
 #include "SDL.h"
 #include "algorithems/algorithms.h"
+#include "algorithems/bubbleSort.h"
 #include "algorithems/insertionSort.h"
 #include "algorithems/quickSort.h"
 #include "imgui/imgui.h"
@@ -39,6 +40,7 @@ public:
         s_currentAlgo = s_algoMenu;
         s_algoMenu->RegisterAlgorithm<algo::insertionSort>("Insertion Sort");
         s_algoMenu->RegisterAlgorithm<algo::quickSort>("Quick Sort");
+        s_algoMenu->RegisterAlgorithm<algo::bubbleSort>("bubble Sort");
     }
 
     /*
