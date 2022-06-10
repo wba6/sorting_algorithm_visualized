@@ -1,6 +1,4 @@
-//
-// Created by william on 5/25/22.
-//
+
 
 #include "randomNumGen.h"
 #include <chrono>

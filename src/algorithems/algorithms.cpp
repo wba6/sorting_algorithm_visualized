@@ -1,6 +1,4 @@
-//
-// Created by william on 5/5/22.
-//
+
 
 #include "algorithms.h"
 #include "imgui/imgui.h"

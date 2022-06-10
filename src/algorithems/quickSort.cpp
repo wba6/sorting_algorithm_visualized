@@ -1,6 +1,4 @@
-//
-// Created by william on 5/9/22.
-//
+
 
 #include "quickSort.h"
 #include "../ObjectRender.h"

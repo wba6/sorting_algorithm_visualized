@@ -1,6 +1,3 @@
-//
-// Created by William Aey on 5/30/2022.
-//
 
 #include "bubbleSort.h"
 #include "../ObjectRender.h"
