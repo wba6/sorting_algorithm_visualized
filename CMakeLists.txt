@@ -34,3 +34,5 @@ target_link_libraries(${PROJECT_NAME}
         SDL2main
         SDL2
         imgui)
+
+file(COPY src/vender/SDL2/lib/x64/SDL2.dll DESTINATION ${CMAKE_BINARY_DIR})
